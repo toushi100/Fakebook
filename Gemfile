@@ -44,6 +44,8 @@ gem "bootsnap", require: false
 
 gem 'devise', '~> 4.8', '>= 4.8.1'
 
+gem 'activestorage-validator'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
