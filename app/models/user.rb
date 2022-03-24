@@ -8,7 +8,6 @@ class User < ApplicationRecord
 
 
   validates_presence_of :user_name
-  validates_uniqueness_of :user_name
   validates :user_name, length: { minimum: 5 , message: "cannot be less than 5 characters" }
 
 
