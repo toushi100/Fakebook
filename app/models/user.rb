@@ -6,7 +6,8 @@ class User < ApplicationRecord
   has_many :friends, through: :friendlists
   has_many :friend_requests_sent, ->{where(status: false)}, class_name: 'Friendlist'
   has_many :requests_sent, through: :friend_requests_sent, source: :friend
-
+  has_many :friend_requests_received, ->{where(status: false)}, class_name: 'Friendlist', foreign_key: 'friend_id'
+  has_many :requests_received, through: :friend_requests_received, source: :user
 
 
   # Validations 
