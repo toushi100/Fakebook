@@ -1,9 +1,64 @@
+<!DOCTYPE html>
+<html>
+<style>
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 50;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  right: 0;
+}
+</style>
+
+
+
 <h1>  You can view your own data only</h1>
+<br>
+<div class="split left">
 
-<%if @user.profile_picture.representable?%>
-      <%= image_tag @user.profile_picture , size: "200x200" %>
-<%end%> 
-<h1>Name : <%= @user.user_name %></h1>
-<h5>Phone Number : <%= @user.phone_number%></h5>
-<h5>Email : <%= @user.email%></h5>
+      <%if @user.profile_picture.representable?%>
+            <%= image_tag @user.profile_picture , size: "200x200" %>
+      <%end%> 
+      <h1>Name : <%= @user.user_name %></h1>
+      <h5>Phone Number : <%= @user.phone_number%></h5>
+      <h5>Email : <%= @user.email%></h5>
+</div>
 
+
+<div class="split right">
+
+      <h1>Friends Table</h1>
+      <table>
+            <thead>
+                  <tr>
+                  <th> ID </th>
+                  <th> Name </th>
+                  </tr>
+
+            </thead>
+            <% @user.friendlists.each do |friend| %>
+            <tbody>
+                  <tr>
+                        <% if friend.status == true %>
+                              <td><%=friend.friend_id %></td>
+                              <% temp = User.find(friend.friend_id)%>
+                              <td> <%= temp.user_name%> </td>
+                        <%end%>
+                  </tr>
+            </tbody>
+            <%end%>
+      </table>
+
+</div>
+
+</html>
