@@ -25,9 +25,13 @@ class UsersController < ApplicationController
     @invertfriend.friend_id = @accept.user_id
     @invertfriend.status = true
     @invertfriend.save
-
     redirect_to request.referrer 
+  end
 
+  def remove_friend_request
+    Friendlist.find_by_friend_id(params[:id]).delete
+    
+    redirect_to request.referrer
   end
 
 end

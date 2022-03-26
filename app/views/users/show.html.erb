@@ -102,6 +102,7 @@
                         <td>  <%= user.id %>          </td>
                         <td>  <%= user.user_name %>   </td>
                         <td> <%= button_to 'Accept Friend Request', accept_friend_request_path(current_user.id) %> </td>
+                        <td> <%= button_to 'Remove Friend Request', remove_friend_request_path(current_user.id), method: :delete %> </td>
                   </tr>
                   <% }.join("\n ") %>
             </tbody>
