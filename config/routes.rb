@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
 
   match '/users',   to: 'users#index',   via: 'get'
-  match '/users',   to: 'users#send_friend_request',   via: 'get'
+  post 'users/send_friend_request/:id', to: 'users#send_friend_request', as: 'send_friend_request'
   resources :users, :only =>[:show]
 
 

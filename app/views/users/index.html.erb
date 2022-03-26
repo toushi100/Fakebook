@@ -10,15 +10,12 @@
       <strong style="color : Red" class="card-title" >Name :</strong>
       <%= user.user_name %>
     </p>
-
-    
+    <br>
+      <%= button_to 'Send Friend Request', send_friend_request_path(user.id) %>
+    <br>
+    <h1>============================================</h1>
     </div>
 
     
   </div>
 <% end %>
-
-
-
-<p>Find me in app/views/users/index.html.erb</p>
-
