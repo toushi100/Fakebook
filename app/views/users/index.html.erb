@@ -1,0 +1,32 @@
+<h1>Users#index</h1>
+<% @users.each do |user| %>
+  <div class="card">
+    <%if user.profile_picture.representable?%>
+      <%= image_tag user.profile_picture , size: "200x200" %>
+    <%end%> 
+    <div class="card-body">
+
+    <p>
+      <h4 style="color : Red" class="card-title" >Name :</h4>
+      <%= user.user_name %>
+    </p>
+
+    <p>
+      <strong class="card-text"> Email :</strong>
+      <%= user.email %>
+    </p>
+
+    <p>
+      <strong class="card-text">Phone number :</strong>
+      <%= user.phone_number %>
+    </p>
+    </div>
+
+    
+  </div>
+<% end %>
+
+
+
+<p>Find me in app/views/users/index.html.erb</p>
+
