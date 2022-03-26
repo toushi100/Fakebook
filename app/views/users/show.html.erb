@@ -88,6 +88,7 @@
                   <tr>
                   <th> ID </th>
                   <th> Name </th>
+                  <th> ?? </th>
                   </tr>
 
             </thead>
@@ -100,6 +101,7 @@
                   <tr>
                         <td>  <%= user.id %>          </td>
                         <td>  <%= user.user_name %>   </td>
+                        <td> <%= button_to 'Accept Friend Request', accept_friend_request_path(current_user.id) %> </td>
                   </tr>
                   <% }.join("\n ") %>
             </tbody>
