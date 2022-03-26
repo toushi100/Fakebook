@@ -58,7 +58,52 @@
             </tbody>
             <%end%>
       </table>
+      <h1>Pending Requests</h1>
+      <table>
+            <thead>
+                  <tr>
+                  <th> ID </th>
+                  <th> Name </th>
+                  </tr>
 
+            </thead>
+              </thead>
+            <% @user.friendlists.each do |friend| %>
+            <tbody>
+                  <tr>
+                        <% if friend.status == false %>
+                              <td><%=friend.friend_id %></td>
+                              <% temp = User.find(friend.friend_id)%>
+                              <td> <%= temp.user_name%> </td>
+                        <%end%>
+                  </tr>
+            </tbody>
+            <%end%>
+      </table>
+
+      
+      <h1>Received Requests</h1>
+      <table>
+            <thead>
+                  <tr>
+                  <th> ID </th>
+                  <th> Name </th>
+                  </tr>
+
+            </thead>
+              </thead>
+            
+            <tbody>
+                  
+                  <%temp = @user.requests_received%>
+                  <% temp.map { |user| %>
+                  <tr>
+                        <td>  <%= user.id %>          </td>
+                        <td>  <%= user.user_name %>   </td>
+                  </tr>
+                  <% }.join("\n ") %>
+            </tbody>
+      </table>
 </div>
 
 </html>
