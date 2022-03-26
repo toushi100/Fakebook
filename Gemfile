@@ -46,6 +46,8 @@ gem 'devise', '~> 4.8', '>= 4.8.1'
 
 gem 'activestorage-validator'
 
+#use RSpec for Testing
+gem 'rspec-rails'
 # Use Sass to process CSS
 # gem "sassc-rails"
 
