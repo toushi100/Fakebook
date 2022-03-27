@@ -5,6 +5,11 @@
   </p>
 
   <%# <p>
+    <strong>Comment:</strong>
+    <%= render post.comments %>
+  <%# </p> %> 
+
+  <%# <p>
     <strong>Image:</strong>
     <%= link_to post.image.filename, post.image if post.image.attached? %>
   <%# </p> %> 

@@ -2,6 +2,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_one_attached :profile_picture
+  has_many :posts
+  has_many :comments
   after_commit :add_default_avatar, on: %i[create update]
 
   validates_presence_of :user_name

@@ -4,7 +4,15 @@
  <%= image_tag(i, size: "200x200") %>
 <% end %>
 
+
 <%= render @post %>
+<h2> <%= @post.comments.count %> Comments </h2>
+<%= render @post.comments %>
+
+<%= render 'comments/form' %>
+<%# <%= render 'comments/comment' %> 
+
+
 
 <div>
   <%= link_to "Edit this post", edit_post_path(@post) %> |

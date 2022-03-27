@@ -1,0 +1,5 @@
+<p> <%= comment.content %> </p>
+<small> by <%= comment.user.email %> </small>
+<p> <%= time_ago_in_words(comment.created_at) %> </p>
+
+<%= link_to 'Delete', destroy_comment_url(@post.comments), method: :delete  %>
