@@ -1,21 +1,25 @@
-<h1>Users#index</h1>
+<h1>Find New Friends! :D</h1>
+
+
 <% @users.each do |user| %>
-  <div class="card">
-    <%if user.profile_picture.representable?%>
-      <%= image_tag user.profile_picture , size: "200x200" %>
-    <%end%> 
-    <div class="card-body">
+  <% if user != current_user%>
+    <div class="card">
+      <%if user.profile_picture.representable?%>
+        <%= image_tag user.profile_picture , size: "200x200" %>
+      <%end%> 
+      <div class="card-body">
 
-    <p>
-      <strong style="color : Red" class="card-title" >Name :</strong>
-      <%= user.user_name %>
-    </p>
-    <br>
-      <%= button_to 'Send Friend Request', send_friend_request_path(user.id) %>
-    <br>
-    <h1>============================================</h1>
+      <p>
+        <strong style="color : Red" class="card-title" >Name :</strong>
+        <%= user.user_name %>
+      </p>
+      <br>
+        <%= button_to 'Send Friend Request', send_friend_request_path(user.id) %>
+      <br>
+      <h1>============================================</h1>
+      </div>
+
+      
     </div>
-
-    
-  </div>
+  <%end%>
 <% end %>
