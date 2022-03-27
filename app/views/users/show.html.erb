@@ -43,6 +43,7 @@
                   <tr>
                   <th> ID </th>
                   <th> Name </th>
+                  <th> Delete el wad da </th>
                   </tr>
 
             </thead>
@@ -53,6 +54,7 @@
                               <td><%=friend.friend_id %></td>
                               <% temp = User.find(friend.friend_id)%>
                               <td> <%= temp.user_name%> </td>
+                              <td> <%= button_to 'Remove Friend', remove_friend_path(current_user.id), method: :delete %> </td>
                         <%end%>
                   </tr>
             </tbody>

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   match '/users',   to: 'users#index',   via: 'get'
   post 'users/send_friend_request/:id', to: 'users#send_friend_request', as: 'send_friend_request'
   delete 'users/remove_friend_request/:id', to: 'users#remove_friend_request', as: 'remove_friend_request'
+  delete 'users/remove_friend/:id', to: 'users#remove_friend', as: 'remove_friend'
   post 'users/accept_friend_request/:id', to: 'users#accept_friend_request', as: 'accept_friend_request'
   resources :users, :only =>[:show]
 
