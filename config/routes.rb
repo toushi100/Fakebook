@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
+  get 'comments/index'
+  
   resources :posts do
     resources :comments
   end
 
-  get 'delete/:id', to: 'comments#destroy_comment', as: 'destroy_comment'
-
+  get 'delete', to: 'comments#destroy', as: 'destroy_comment'
+  
   get 'users/index'
   devise_for :users, controllers: {
     sessions: 'users/sessions'
