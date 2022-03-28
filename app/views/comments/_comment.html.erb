@@ -1,4 +1,10 @@
 <p> <%= comment.content %> </p>
 <p> <%= time_ago_in_words(comment.created_at) %> </p>
 
+<%# <% if current_user?(comment.user) %>
+
+<%# <% end %> 
+
+<p> by <%= current_user.user_name %> </p>
+
 <%= button_to 'Delete', destroy_comment_url(comment),method: :delete  %>
