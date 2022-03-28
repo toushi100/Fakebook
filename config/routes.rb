@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  get 'delete/:id', to: 'comments#destroy_comment', as: 'destroy_comment'
+  delete 'posts/:id/comment/:id', to: 'comments#destroy_comment', as: 'destroy_comment'
 
   get 'users/index'
   devise_for :users, controllers: {
