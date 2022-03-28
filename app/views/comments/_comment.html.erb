@@ -5,6 +5,6 @@
 
 <%# <% end %> 
 
-<p> by <%= current_user.user_name %> </p>
+<p> by <%= comment.user.user_name %> </p>
 
 <%= button_to 'Delete', destroy_comment_url(comment),method: :delete  %>
