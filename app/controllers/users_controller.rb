@@ -11,6 +11,8 @@ class UsersController < ApplicationController
     @temp = User.find(params[:id])
     @newfriend.friend_id = @temp.id
     @newfriend.save
+    
+    redirect_to request.referrer 
     # Notification for friend request
   end
 
