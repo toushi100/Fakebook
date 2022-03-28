@@ -20,6 +20,11 @@
     <%= form.label :image, style: "display: block" %>
     <%= form.file_field :image, multiple:true %>
   </div>
+  
+  <div>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.text_field :user_id %>
+  </div>
 
   <div>
     <%= form.submit %>
