@@ -24,7 +24,7 @@ class User < ApplicationRecord
 
 
   validates_uniqueness_of :phone_number
-  validates :phone_number, numericality: {message: "must be numeric value" }, length: { is: 7 , message: "must be more than 7 digits" }
+
 
   validates :phone_number,:presence => true,
                  :numericality => true,
