@@ -38,8 +38,8 @@ class UsersController < ApplicationController
   def remove_friend
     @deleteFirst = Friendlist.find_by_user_id(params[:id])
     @deleteSecond = Friendlist.find_by_friend_id(params[:id])
-    puts @deleteFirst.delete
-    puts @deleteSecond.delete
+    @deleteFirst.delete
+    @deleteSecond.delete
     redirect_to request.referrer
   end
 
@@ -51,6 +51,12 @@ class UsersController < ApplicationController
     
     @block.save
     self.remove_friend
+  end
+
+  def un_block_friend
+    BlockList.find_by_blocked_friend_id(params[:id]).delete
+    
+    redirect_to request.referrer
   end
 
 end

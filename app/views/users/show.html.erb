@@ -26,9 +26,8 @@
 <br>
 <div class="split left">
 
-      <%if @user.profile_picture.representable?%>
-            <%= image_tag @user.profile_picture , size: "200x200" %>
-      <%end%> 
+      <%= image_tag @user.profile_picture , size: "200x200" %>
+      
       <h1>Name : <%= @user.user_name %></h1>
       <h5>Phone Number : <%= @user.phone_number%></h5>
       <h5>Email : <%= @user.email%></h5>
@@ -119,6 +118,7 @@
                   <tr>
                   <th> ID </th>
                   <th> Name </th>
+                  <th> elly haydos hena mohaza2</th>
                   </tr>
 
             </thead>
@@ -128,6 +128,7 @@
                         <td><%=friend.blocked_friend_id %></td>
                         <% temp = User.find(friend.blocked_friend_id)%>
                         <td> <%= temp.user_name%> </td>
+                        <td> <%= button_to 'Un Block', un_block_friend_path(friend.blocked_friend_id), method: :delete %> </td>
 
                   </tr>
             </tbody>
