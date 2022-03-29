@@ -1,6 +1,9 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:create, :show, :index]
 
+  @user = User.all
   # GET /posts or /posts.json
   def index
     @posts = Post.all
@@ -22,19 +25,19 @@ class PostsController < ApplicationController
   end
 
   # POST /posts or /posts.json
-  def create
-    @post = current_user.posts.new(post_params)
+    def create
+      @post = current_user.posts.new(post_params)
 
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
-        format.json { render :show, status: :created, location: @post }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @post.save
+          format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
+          format.json { render :show, status: :created, location: @post }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @post.errors, status: :unprocessable_entity }
+        end
       end
     end
-  end
 
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
