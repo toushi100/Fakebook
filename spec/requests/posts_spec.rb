@@ -57,7 +57,8 @@ RSpec.describe "Posts", type: :request do
   end
 
   describe "GET /posts/new" do
-    it "should response true" do
+    it "should response true with user signed in" do
+      sign_in Ahmed
       get new_post_url
       expect(response).to be_successful
     end
