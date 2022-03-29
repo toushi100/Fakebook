@@ -15,6 +15,7 @@ class User < ApplicationRecord
                  :length => { :minimum => 10, :maximum => 15 }
 
 
+                 
   private
   def add_default_avatar
     unless profile_picture.attached?
