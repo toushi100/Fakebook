@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post 'users/block_friend/:id', to: 'users#block_friend', as: 'block_friend'
   delete 'users/un_block_friend/:id', to: 'users#un_block_friend', as: 'un_block_friend'
   post 'users/accept_friend_request/:id', to: 'users#accept_friend_request', as: 'accept_friend_request'
+  post 'users/create_group/@nameValue', to: 'users#create_group', as: 'create_group'
   resources :users, :only =>[:show]
 
 
