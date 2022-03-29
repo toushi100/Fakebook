@@ -12,6 +12,9 @@ class User < ApplicationRecord
 
   has_many :block_lists
   has_many :blocked_friend, through: :block_lists
+  
+  has_many :user_groups
+  has_many :groups, through: :user_groups
   # Validations 
 
 
