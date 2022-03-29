@@ -9,13 +9,12 @@ class CommentsController < ApplicationController
     @comment.content = params["comment"]["content"]
     @comment.user_id = current_user.id
     @comment.save()
-    redirect_to request.referrer
+    redirect_to post_url(@post)
   end
 
   def destroy_comment
     @comment = Comment.find(params[:id])
     @comment.destroy
-    redirect_to request.referrer
   end
   
   
@@ -25,7 +24,7 @@ class CommentsController < ApplicationController
     #     redirect_to request.referrer
     # end
 
-    redirect_to request.referrer unless @comment.user == current_user
+    redirect_to post_url(@comment.post_id) unless @comment.user == current_user
   end
 
   private
