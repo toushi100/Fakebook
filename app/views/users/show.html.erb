@@ -44,6 +44,7 @@
                   <th> ID </th>
                   <th> Name </th>
                   <th> Delete el wad da </th>
+                  <th> Block el wad da </th>
                   </tr>
 
             </thead>
@@ -55,6 +56,7 @@
                               <% temp = User.find(friend.friend_id)%>
                               <td> <%= temp.user_name%> </td>
                               <td> <%= button_to 'Remove Friend', remove_friend_path(current_user.id), method: :delete %> </td>
+                              <td> <%= button_to 'Block Friend', block_friend_path(friend.friend_id)%> </td>
                         <%end%>
                   </tr>
             </tbody>
@@ -108,6 +110,28 @@
                   </tr>
                   <% }.join("\n ") %>
             </tbody>
+      </table>
+
+
+      <h1>Blocked Friends Table</h1>
+      <table>
+            <thead>
+                  <tr>
+                  <th> ID </th>
+                  <th> Name </th>
+                  </tr>
+
+            </thead>
+            <% @user.block_lists.each do |friend| %>
+            <tbody>
+                  <tr>
+                        <td><%=friend.blocked_friend_id %></td>
+                        <% temp = User.find(friend.blocked_friend_id)%>
+                        <td> <%= temp.user_name%> </td>
+
+                  </tr>
+            </tbody>
+            <%end%>
       </table>
 </div>
 

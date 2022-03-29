@@ -43,4 +43,14 @@ class UsersController < ApplicationController
     redirect_to request.referrer
   end
 
+  def block_friend
+    @block = BlockList.new
+    @block.user_id = current_user.id
+    @temp = User.find(params[:id])
+    @block.blocked_friend_id = @temp.id
+    
+    @block.save
+    self.remove_friend
+  end
+
 end
