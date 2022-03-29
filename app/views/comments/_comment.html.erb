@@ -7,4 +7,5 @@
 
 <p> by <%= comment.user.user_name %> </p>
 
+<%# <%= button_to 'Edit', update_comment_url(comment) %> 
 <%= button_to 'Delete', destroy_comment_url(comment),method: :delete  %>

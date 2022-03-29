@@ -12,6 +12,13 @@ class CommentsController < ApplicationController
     redirect_to post_url(@post)
   end
 
+  def update_comment
+    @comment = Comment.find(params[:id])
+    @comment = @comment.update(comment_params)
+    @comment.save()
+    redirect_to post_url(@post)
+  end
+
   def destroy_comment
     @comment = Comment.find(params[:id])
     @comment.destroy
@@ -23,7 +30,7 @@ class CommentsController < ApplicationController
     # unless current_user?(@comment.user)
     #     redirect_to request.referrer
     # end
-    redirect_to post_url(@comment.post_id) unless @comment.user == current_user
+    redirect_to post_url(@comment.post_id), notice: "Cannot delete others comment" unless @comment.user == current_user
   end
 
   private

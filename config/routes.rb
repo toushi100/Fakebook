@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   end
 
   delete 'posts/:id/comment/:id', to: 'comments#destroy_comment', as: 'destroy_comment'
+  put 'posts/:id/comments/:id', to: 'comments#update_comment', as: 'update_comment'
 
   get 'users/index'
   devise_for :users, controllers: {
