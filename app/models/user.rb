@@ -2,7 +2,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_one_attached :profile_picture
-  has_many :posts
+  has_many :posts, dependent: :destroy
   has_many :comments
   after_commit :add_default_avatar, on: %i[create update]
 

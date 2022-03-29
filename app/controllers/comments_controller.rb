@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-    before_action :correct_user?, only: [:destroy_comment]
+  before_action :correct_user?, only: [:destroy_comment]
 
   @comments = Comment.all
 
@@ -23,7 +23,6 @@ class CommentsController < ApplicationController
     # unless current_user?(@comment.user)
     #     redirect_to request.referrer
     # end
-
     redirect_to post_url(@comment.post_id) unless @comment.user == current_user
   end
 

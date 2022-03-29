@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
   before_action :authenticate_user!, only: [:create, :show, :index]
+  before_action :correct_user?, only: [:edit, :update, :destroy]
 
   @user = User.all
   # GET /posts or /posts.json
@@ -60,6 +61,13 @@ class PostsController < ApplicationController
       format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def correct_user?
+    @post = Post.find_by(id: params[:id])
+    
+    redirect_to post_url(@post), notice: "Cannot edit or delete others post" unless @post.user == current_user
+
   end
 
   private
