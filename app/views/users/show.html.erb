@@ -130,11 +130,12 @@
             <% @user.block_lists.each do |friend| %>
             <tbody>
                   <tr>
-                        <td><%=friend.blocked_friend_id %></td>
-                        <% temp = User.find(friend.blocked_friend_id)%>
-                        <td> <%= temp.user_name%> </td>
-                        <td> <%= button_to 'Un Block', un_block_friend_path(friend.blocked_friend_id), method: :delete %> </td>
-
+                        <%if friend.blocked_status == false%>
+                              <td><%=friend.blocked_friend_id %></td>
+                              <% temp = User.find(friend.blocked_friend_id)%>
+                              <td> <%= temp.user_name%> </td>
+                              <td> <%= button_to 'Un Block', un_block_friend_path(friend.blocked_friend_id), method: :delete %> </td>
+                        <%end%>
                   </tr>
             </tbody>
             <%end%>

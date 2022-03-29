@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_28_193819) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_29_022655) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -44,6 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_28_193819) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "blocked_friend_id"
+    t.boolean "blocked_status", default: false
     t.index ["blocked_friend_id"], name: "index_block_lists_on_blocked_friend_id"
     t.index ["user_id"], name: "index_block_lists_on_user_id"
   end

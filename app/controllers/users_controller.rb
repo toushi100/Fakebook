@@ -55,7 +55,8 @@ class UsersController < ApplicationController
     
     @temp = User.find(params[:id])
     @block.user_id = @temp.id
-    @block.blocked_friend_id = current_user.id 
+    @block.blocked_friend_id = current_user.id
+    @block.blocked_status = true
     
     @block.save
     
