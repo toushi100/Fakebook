@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get 'groups/index', to: 'groups#index'
   post 'groups/index', to: 'groups#create'
   get 'groups/new', to: 'groups#new'
+  post 'groups/add_user_to_group/:id', to: 'groups#add_user_to_group' , as: 'add_user_to_group'
 
   root to: "home#index"
 end

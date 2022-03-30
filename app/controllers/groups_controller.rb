@@ -8,6 +8,11 @@ class GroupsController < ApplicationController
     redirect_to request.referrer
   end
 
+  def add_user_to_group
+    current_user.groups << Group.find(params[:id])
+    redirect_to request.referrer 
+  end
+
   def edit
 
   end
