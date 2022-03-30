@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
   #                 USERS ROUTES
-
-
   get 'users/index'
   devise_for :users, controllers: {  sessions: 'users/sessions'  }
   devise_scope :user do
@@ -20,7 +18,7 @@ Rails.application.routes.draw do
 
   #                    GROUPS ROUTES
 
-  
+  match '/groups',   to: 'groups#index',   via: 'get'
   get 'groups/index', to: 'groups#index'
   post 'groups/index', to: 'groups#create'
   get 'groups/new', to: 'groups#new'

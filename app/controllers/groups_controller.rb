@@ -2,8 +2,10 @@ class GroupsController < ApplicationController
   def create
     @newGroup = Group.new
     @newGroup.name = params[:name]
+    @newGroup.created_by_id = current_user.id
     @newGroup.save
-
+    
+    current_user.groups << @newGroup
 
     redirect_to request.referrer
   end

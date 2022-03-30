@@ -178,7 +178,11 @@
                                     <%else%>
                                           <td><h6> Joined</h4>
                                     <%end%>
-                                    <td> <%= button_to ' Delete' , delete_path(group.id) , method: :delete%>
+                                    <%if current_user.id == group.created_by_id%>
+                                          <td> <%= button_to ' Delete' , delete_path(group.id) , method: :delete%>
+                                    <%else%>
+                                          <td><h6> You cant delete this group </h6></td>
+                                    <%end%>
                               </tr>
                               <%end%>
                   </tbody>
