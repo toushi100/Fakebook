@@ -37,8 +37,16 @@
       <a href='http://localhost:3000/users'></i>Find Friends</a>
       <br>
       <br>
-      
-      <td> <%= button_to 'Add new group', create_group_path() %> </td>
+      <%= form_tag("/groups/index", method: "post") do %>
+            <%= label_tag :name %><br>
+            <%= text_field_tag :name %>
+            <br>
+            
+            <p>
+            <%= submit_tag("Add new group") %>
+            </p>
+      <% end %>
+
 
 
 </div>
@@ -144,6 +152,27 @@
                   </tr>
             </tbody>
             <%end%>
+      </table>
+      <br>
+      <br>
+      <br>
+      <h1>Groups</h1>
+      <table>
+            <thead>
+                  <tr>
+                  <th> ID </th>
+                  <th> Name </th>
+                  <th> join?</th>
+                  </tr>
+            </thead>
+            <tbody>
+                  <% @groups.each do |group| %>
+                  <tr>
+                        <td> <%= group.id%></td>
+                        <td> <%= group.name%></td>
+                  </tr>
+                  <%end%>
+           </tbody>
       </table>
 </div>
 

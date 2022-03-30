@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   end
   def show
     @user = User.find_by_id(params[:id])
+    @groups = Group.all
   end
   def send_friend_request
     @newfriend = Friendlist.new
@@ -69,18 +70,4 @@ class UsersController < ApplicationController
     redirect_to request.referrer
   end
 
-  def create_group
-    @newGroup = Group.new
-    @newGroup.name = params[:name]
-    @newGroup.save
-
-
-    redirect_to request.referrer
-  end
-  def edit_group
-  end
-  def update_group
-  end
-  def new_group
-  end
 end
