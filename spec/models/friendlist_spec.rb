@@ -43,6 +43,4 @@ RSpec.describe Friendlist, type: :model do
     expect(new_friend_before_accept.status).to eq(false)
     expect(new_friend_after_accept.status).to eq(false)
   end
-
-  
 end
