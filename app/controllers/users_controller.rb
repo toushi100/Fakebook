@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  def index
+  def index #should be removed (3ashan da msh mawgood fel mawqe3 elli by2aldona feeh elli esmo facebook )
     @users = User.all
   end
   def show
