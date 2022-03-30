@@ -13,6 +13,16 @@ class GroupsController < ApplicationController
     redirect_to request.referrer 
   end
 
+  def remove_user_from_group
+    current_user.user_groups.find_by_group_id(params[:id]).delete
+    redirect_to request.referrer 
+  end
+
+  def delete
+    Group.find(params[:id]).delete
+    redirect_to request.referrer 
+  end
+
   def edit
 
   end

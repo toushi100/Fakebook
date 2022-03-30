@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   post 'groups/index', to: 'groups#create'
   get 'groups/new', to: 'groups#new'
   post 'groups/add_user_to_group/:id', to: 'groups#add_user_to_group' , as: 'add_user_to_group'
+  delete 'groups/remove_user_from_group/:id', to: 'groups#remove_user_from_group' , as: 'remove_user_from_group'
+  delete 'groups/delete/:id', to: 'groups#delete' , as: 'delete'
 
   root to: "home#index"
 end
