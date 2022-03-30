@@ -17,9 +17,9 @@ Rails.application.routes.draw do
 
 
   #                    GROUPS ROUTES
+  
 
-  match '/groups',   to: 'groups#index',   via: 'get'
-  get 'groups/index', to: 'groups#index'
+  get 'groups/index', to: 'groups#index' ,as: 'groups'
   post 'groups/index', to: 'groups#create'
   get 'groups/new', to: 'groups#new'
   post 'groups/add_user_to_group/:id', to: 'groups#add_user_to_group' , as: 'add_user_to_group'
