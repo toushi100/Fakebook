@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_one_attached :profile_picture
   has_many :posts, dependent: :destroy
   has_many :comments
+  has_many :reacts
   after_commit :add_default_avatar, on: %i[create update]
 
   validates_presence_of :user_name
