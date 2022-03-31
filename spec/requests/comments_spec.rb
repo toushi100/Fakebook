@@ -18,8 +18,8 @@ RSpec.describe "Comments", type: :request do
     sign_in Ahmed
     @comment = { "content" => "this comment changed to this" }
     @empty_comment = { content: "" }
-    @post_by_ahmed = Post.create!(text: "This post is by Ahmed", image: @file,
-                                  user_id: Ahmed.id)
+    @post_by_ahmed = Post.create!(text: "This post is by Ahmed",
+                                  image: @file, user_id: Ahmed.id)
     @comment_by_ahmed = Comment.create!(content: "This comment is by Ahmed",
                                         user_id: Ahmed.id, post_id: @post_by_ahmed.id)
     @comment_by_ali = Comment.create!(content: "This comment is by Ali",
@@ -65,7 +65,7 @@ RSpec.describe "Comments", type: :request do
       end.to change(Comment, :count).by(0)
       expect(response).to redirect_to(post_url(@post_by_ahmed))
     end
-    it "user should sign in delete their own comments" do
+    it "user should sign delete their own comments" do
       sign_out Ahmed
       sign_out Ali
       expect do
