@@ -49,22 +49,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_29_022655) do
     t.index ["user_id"], name: "index_block_lists_on_user_id"
   end
 
-  create_table "blocks", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "blocked_id_id"
-    t.index ["blocked_id_id"], name: "index_blocks_on_blocked_id_id"
-    t.index ["user_id"], name: "index_blocks_on_user_id"
-  end
-
   create_table "friendlists", force: :cascade do |t|
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "friend_id"
     t.boolean "status", default: false
-    t.boolean "blocked", default: false
     t.index ["friend_id"], name: "index_friendlists_on_friend_id"
     t.index ["user_id"], name: "index_friendlists_on_user_id"
   end
@@ -87,8 +77,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_29_022655) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "block_lists", "users"
   add_foreign_key "block_lists", "users", column: "blocked_friend_id"
-  add_foreign_key "blocks", "users"
-  add_foreign_key "blocks", "users", column: "blocked_id_id"
   add_foreign_key "friendlists", "users"
   add_foreign_key "friendlists", "users", column: "friend_id"
 end
