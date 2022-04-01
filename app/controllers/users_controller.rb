@@ -11,8 +11,7 @@ class UsersController < ApplicationController
     @temp = User.find(params[:id])
     @newfriend.friend_id = @temp.id
     @newfriend.save
-    
-    redirect_to request.referrer 
+    redirect_to users_index_url
     # Notification for friend request
   end
 
@@ -27,7 +26,7 @@ class UsersController < ApplicationController
     @invertfriend.friend_id = @accept.user_id
     @invertfriend.status = true
     @invertfriend.save
-    redirect_to request.referrer 
+    redirect_to request.referrer  
   end
 
   def remove_friend_request
