@@ -24,12 +24,11 @@ class UsersController < ApplicationController
     @invertfriend.friend_id = @accept.user_id
     @invertfriend.status = true
     @invertfriend.save
-    redirect_to request.referrer  
   end
 
   def remove_friend_request
     Friendlist.find_by_friend_id(params[:id]).delete
-    redirect_to request.referrer
+    redirect_to user_url(current_user)
   end
 
   def remove_friend
@@ -37,7 +36,7 @@ class UsersController < ApplicationController
     @deleteSecond = Friendlist.find_by_friend_id(params[:id])
     @deleteFirst.delete
     @deleteSecond.delete
-    redirect_to request.referrer
+    redirect_to user_url(current_user)
   end
 
   def block_friend
@@ -63,7 +62,7 @@ class UsersController < ApplicationController
   def un_block_friend
     BlockList.find_by_blocked_friend_id(params[:id]).delete
     BlockList.find_by_user_id(params[:id]).delete
-    redirect_to request.referrer
+    redirect_to user_url(current_user)
   end
 
 end
