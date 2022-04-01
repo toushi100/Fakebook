@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  resources :reacts, only: [:create, :destroy]
+  resources :likes, only: [:create, :destroy]
 
   delete 'posts/:id/comment/:id', to: 'comments#destroy_comment', as: 'destroy_comment'
   put 'posts/:id/comments/:id', to: 'comments#update_comment', as: 'update_comment'
