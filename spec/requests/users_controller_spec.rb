@@ -33,5 +33,29 @@ RSpec.describe "UsersControllers", type: :request do
       expect(response).to be_successful
     end
   end
+  describe "POST users/send_friend_request/:id" do
+    it "renders a successful response when user is signed in" do
+      sign_in Ahmed
+      expect do
+      post send_friend_request_url(Ali), params: {"id" => Ali.id}
+      end.to change(Friendlist,:count).by(1)
+    end
 
+    it "renders a redirect to sign in response when user is not signed in" do
+      post send_friend_request_url(Ali), params: {"id" => Ali.id}
+      expect(response).to redirect(sign_in_url)
+    end
+
+  end
+
+  describe "DELETE users/remove_friend_request/:id" do
+    it "renders successful " do
+      sign_in Ahmed
+      expect do
+      delete remove_friend_request_url(Ali), params: {"id" => Ali.id}
+      end.to change(Friendlist,:count).by(1)
+    end
+
+
+  end
 end
