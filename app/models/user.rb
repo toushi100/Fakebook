@@ -10,7 +10,8 @@ class User < ApplicationRecord
   has_many :friend_requests_received, ->{where(status: false)}, class_name: 'Friendlist', foreign_key: 'friend_id'
   has_many :requests_received, through: :friend_requests_received, source: :user
 
-
+  has_many :block_lists
+  has_many :blocked_friend, through: :block_lists
   # Validations 
 
 

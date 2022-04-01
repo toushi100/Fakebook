@@ -1,53 +1,66 @@
 <h1>Find New Friends! :D</h1>
 
 <% @users.each do |user| %>
-    <div class="card">
-      <%if user.profile_picture.representable?%>
+    <% flagIsBlocked =true%>
+    <%#   get users that current user blocks  %>
+    <%current_user.block_lists.each do |isBlocked|%>
+        <%if isBlocked.blocked_friend_id == user.id%>
+          <%flagIsBlocked = false%>
+        <%end%>
+    <%end%>
+    <%#    get Users that blocked current user  %>
+    <%user.block_lists.each do |isBlocked|%>
+        <%if isBlocked.blocked_friend_id == user.id%>
+          <%flagIsBlocked = false%>
+        <%end%>
+    <%end%>
+    <%if flagIsBlocked%>
+      <div class="card">
         <%= image_tag user.profile_picture , size: "200x200" %>
-      <%end%> 
-      <div class="card-body">
+        <div class="card-body">
 
-      <p>
-        <strong style="color : Red" class="card-title" >Name :</strong>
-        <%= user.user_name %>
-      </p>
+        <p>
+          <strong style="color : Red" class="card-title" >Name :</strong>
+          <%= user.user_name %>
+        </p>
 
-      <%#           Check if this user is the same user  %>
-      <%if user.id != current_user.id%>
-        <%flag = true %>
-        <%#         Check if the Current User logged in  is in the Pending list to avoid sending more than 1 friend request   %>
-        <% current_user.friendlists.each do |friend| %>
-          <% if friend.user_id == user.id %>
-           <%flag = false%>
+        <%#           Check if this user is the same user  %>
+        <%if user.id != current_user.id%>
+          <%flag = true %>
+          <%#         Check if the Current User logged in  is in the Pending list to avoid sending more than 1 friend request   %>
+          <% current_user.friendlists.each do |friend| %>
+            <% if friend.user_id == user.id %>
+            <%flag = false%>
+            <%end%>
+            <% if friend.friend_id == user.id %>
+            <%flag = false%>
+            <%end%>
           <%end%>
-          <% if friend.friend_id == user.id %>
-           <%flag = false%>
+          <%#         Check if this User is in the Recived list to avoid receving more than 1 friend request   %>
+          <% user.friendlists.each do |friend| %>
+            <% if friend.user_id == current_user.id %>
+            <%flag = false%>
+            <%end%>
+            <% if friend.friend_id == current_user.id %>
+            <%flag = false%>
+            <%end%>
           <%end%>
-        <%end%>
-        <%#         Check if this User is in the Recived list to avoid receving more than 1 friend request   %>
-        <% user.friendlists.each do |friend| %>
-          <% if friend.user_id == current_user.id %>
-           <%flag = false%>
-          <%end%>
-          <% if friend.friend_id == current_user.id %>
-           <%flag = false%>
-          <%end%>
-        <%end%>
 
 
-        <%if flag%>
-          <br>
-            <%= button_to 'Send Friend Request', send_friend_request_path(user.id) %>
-          <br>
+          <%if flag%>
+            <br>
+              <%= button_to 'Send Friend Request', send_friend_request_path(user.id) %>
+            <br>
+          <%else%>
+            <h3> Pending </h3>
+          <%end%>
         <%else%>
-          <h3> Pending </h3>
+          <a href='http://localhost:3000/users/<%= current_user.id%>'></i>My Profile</a><br><br>
         <%end%>
-      <%else%>
-        <a href='http://localhost:3000/users/<%= current_user.id%>'></i>My Profile</a><br><br>
-      <%end%>
-      <h1>============================================</h1>
-      </div>
+        <h1>============================================</h1>
+        </div>
 
-      
-    </div>
+        
+      </div>
+    <%end%>
 <% end %>

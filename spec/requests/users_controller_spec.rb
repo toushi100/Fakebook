@@ -9,6 +9,13 @@ RSpec.describe "UsersControllers", type: :request do
     Ali = User.create!(user_name: "Ali", email: "Ali@gmail.com",
                        phone_number: 9038456748, profile_picture: @file,
                        password: "123456", password_confirmation: "123456")
+
+                       sign_in Ahmed
+    post send_friend_request_url(Ali)
+    sign_out Ahmed
+    sign_in Ali
+    post accept_friend_request_url
+
   end
   describe "GET /show" do
     it "renders a successful response for show user (profile)" do
@@ -24,8 +31,10 @@ RSpec.describe "UsersControllers", type: :request do
   describe "GET /index" do
     it "renders a successful response when user is not signed in" do
       get users_index_url
-      expect(response).to be_successful
-    end
+
+    
+
+ 
 
     it "renders a successful response when user is signed in" do
       sign_in Ahmed

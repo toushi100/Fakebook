@@ -35,8 +35,34 @@ class UsersController < ApplicationController
   def remove_friend
     @deleteFirst = Friendlist.find_by_user_id(params[:id])
     @deleteSecond = Friendlist.find_by_friend_id(params[:id])
-    puts @deleteFirst.delete
-    puts @deleteSecond.delete
+    @deleteFirst.delete
+    @deleteSecond.delete
+    redirect_to request.referrer
+  end
+
+  def block_friend
+    @block = BlockList.new
+    @block.user_id = current_user.id
+    @temp = User.find(params[:id])
+    @block.blocked_friend_id = @temp.id
+    
+    @block.save
+
+    @block = BlockList.new
+    
+    @temp = User.find(params[:id])
+    @block.user_id = @temp.id
+    @block.blocked_friend_id = current_user.id
+    @block.blocked_status = true
+    
+    @block.save
+    
+    self.remove_friend
+  end
+
+  def un_block_friend
+    BlockList.find_by_blocked_friend_id(params[:id]).delete
+    BlockList.find_by_user_id(params[:id]).delete
     redirect_to request.referrer
   end
 
