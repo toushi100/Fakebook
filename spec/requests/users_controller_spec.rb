@@ -51,11 +51,38 @@ RSpec.describe "UsersControllers", type: :request do
   describe "DELETE users/remove_friend_request/:id" do
     it "renders successful " do
       sign_in Ahmed
+      post send_friend_request_url(Ali), params: {"id" => Ali.id}
+      sign_in Ali
+      post accept_friend_request_url
       expect do
       delete remove_friend_request_url(Ali), params: {"id" => Ali.id}
       end.to change(Friendlist,:count).by(1)
     end
+    it "redirects user to sign in page if user is not signed in " do
+      sign_out Ahmed
+      sign_out Ali
+      expect do
+      delete remove_friend_request_url(Ali), params: {"id" => Ali.id}
+      end.to redirect_to(new_user_session_url)
+    end
 
+    it "friend should be able to remove friend request " do
+      sign_in Ali
+      expect do
+      delete remove_friend_request_url(Ali), params: {"id" => Ali.id}
+      end.to change(Friendlist,:count).by(1)
+    end
+  end
 
+  describe "remove_friend DELETE /users/remove_friend/:id" do
+    it "renders successful " do
+      sign_in Ahmed
+      post send_friend_request_url(Ali), params: {"id" => Ali.id}
+      sign_in Ali
+      post accept_friend_request_url
+      expect do
+      delete remove_friend_url(Ali), params: {"id" => Ali.id}
+      end.to change(Friendlist,:count).by(1)
+    end
   end
 end
