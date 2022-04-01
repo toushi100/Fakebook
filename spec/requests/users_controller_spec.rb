@@ -43,7 +43,7 @@ RSpec.describe "UsersControllers", type: :request do
 
     it "renders a redirect to sign in response when user is not signed in" do
       post send_friend_request_url(Ali), params: {"id" => Ali.id}
-      expect(response).to redirect(sign_in_url)
+      expect(response).to redirect(new_user_session_url)
     end
 
   end
