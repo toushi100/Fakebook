@@ -68,6 +68,7 @@ RSpec.describe "UsersControllers", type: :request do
 
     it "friend should be able to remove friend request " do
       sign_in Ali
+      post send_friend_request_url(Ahmed), params: {"id" => Ali.id}
       expect do
       delete remove_friend_request_url(Ali), params: {"id" => Ali.id}
       end.to change(Friendlist,:count).by(1)
