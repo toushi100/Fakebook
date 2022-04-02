@@ -5,6 +5,10 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments
   has_many :likes
+  has_many :angries
+  has_many :hearts
+  has_many :sads
+  has_many :wows
   after_commit :add_default_avatar, on: %i[create update]
 
   validates_presence_of :user_name

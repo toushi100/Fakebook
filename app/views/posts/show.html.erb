@@ -6,15 +6,51 @@
 
 
 <%= render @post %>
-
-<p> <%= @post.likes.count %> Likes </p>
+<p> <%= react = @post.likes.count + @post.hearts.count + @post.angries.count + @post.sads.count + @post.wows.count %> Reacts </p>
+<p> <%= @post.likes.count %> Likes <%= @post.hearts.count %> Love <%= @post.angries.count %> Angry <%= @post.sads.count %> Sad <%= @post.wows.count %> Wow </p>
 <% like = current_user.likes.find_by(post: @post) %>
+<% heart = current_user.hearts.find_by(post: @post) %>
+<% angry = current_user.angries.find_by(post: @post) %>
+<% sad = current_user.sads.find_by(post: @post) %>
+<% wow = current_user.wows.find_by(post: @post) %>
 
 <div class="btn btn-primary">
     <% if like.nil? %>
       <%= button_to 'Like', likes_path(like), params: {like: {post_id: @post.id}}, :class => "btn" %>
     <% else %>
       <%= button_to 'Dislike', like_path(like), method: :delete, :class => "btn" %>
+  <% end %>
+</div>
+
+<div class="btn btn-danger">
+    <% if heart.nil? %>
+      <%= button_to 'Love', hearts_path(heart), params: {heart: {post_id: @post.id}}, :class => "btn" %>
+    <% else %>
+      <%= button_to 'Undo', heart_path(heart), method: :delete, :class => "btn" %>
+  <% end %>
+</div>
+
+<div class="btn btn-warning">
+    <% if angry.nil? %>
+      <%= button_to 'Angry', angries_path(angry), params: {angry: {post_id: @post.id}}, :class => "btn" %>
+    <% else %>
+      <%= button_to 'Undo', angry_path(angry), method: :delete, :class => "btn" %>
+  <% end %>
+</div>
+
+<div class="btn btn-warning">
+    <% if sad.nil? %>
+      <%= button_to 'Sad', sads_path(sad), params: {sad: {post_id: @post.id}}, :class => "btn" %>
+    <% else %>
+      <%= button_to 'Undo', sad_path(sad), method: :delete, :class => "btn" %>
+  <% end %>
+</div>
+
+<div class="btn btn-warning">
+    <% if wow.nil? %>
+      <%= button_to 'Wow', wows_path(wow), params: {wow: {post_id: @post.id}}, :class => "btn" %>
+    <% else %>
+      <%= button_to 'Undo', wow_path(wow), method: :delete, :class => "btn" %>
   <% end %>
 </div>
 

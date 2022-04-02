@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   end
 
   resources :likes, only: [:create, :destroy]
+  resources :angries, only: [:create, :destroy]
+  resources :hearts, only: [:create, :destroy]
+  resources :sads, only: [:create, :destroy]
+  resources :wows, only: [:create, :destroy]
 
   delete 'posts/:id/comment/:id', to: 'comments#destroy_comment', as: 'destroy_comment'
   put 'posts/:id/comments/:id', to: 'comments#update_comment', as: 'update_comment'
