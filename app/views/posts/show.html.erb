@@ -6,13 +6,18 @@
 
 
 <%= render @post %>
-<%= @post.likes.count %> Likes
+
+<p> <%= @post.likes.count %> Likes </p>
 <% like = current_user.likes.find_by(post: @post) %>
-<% if like.nil? %>
-  <%= button_to 'Like', likes_path, params: {like: {post_id: @post.id}} %>
-<% else %>
-  <%= button_to 'Dislike', like_path(like), method: :delete %>
-<% end %>
+
+<div class="btn btn-primary">
+    <% if like.nil? %>
+      <%= button_to 'Like', likes_path(like), params: {like: {post_id: @post.id}}, :class => "btn" %>
+    <% else %>
+      <%= button_to 'Dislike', like_path(like), method: :delete, :class => "btn" %>
+  <% end %>
+</div>
+
 
 <h2> <%= @post.comments.count %> Comments </h2>
 <%= render @post.comments %>

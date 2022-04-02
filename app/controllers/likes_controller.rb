@@ -11,6 +11,7 @@ class LikesController < ApplicationController
         @post = @like.post
         @like.destroy
         redirect_to post_url(@post)
+        # redirect_to post
     end
 
     private
