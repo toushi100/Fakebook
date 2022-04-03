@@ -28,7 +28,6 @@ RSpec.describe "Comments", type: :request do
 
   describe "POST /posts/:id/comments" do
     it "should create a comment" do
-      sign_in Ahmed
       post post_comments_url(@post_by_ahmed), params: { comment: @comment }
       expect(response).to redirect_to(post_url(@post_by_ahmed))
       expect(Comment.last().content).to eq(@comment["content"])
@@ -37,7 +36,8 @@ RSpec.describe "Comments", type: :request do
     it "should not create a comment if user is not signed in" do
       sign_out Ahmed
       post post_comments_url(@post_by_ahmed), params: { comment: @comment }
-      expect(response).to redirect_to(new_user_session_url)
+      expect(response).to_not be_successful
+      expect(response).to redirect_to(sign_in_url)
     end
 
     it "should create a comment on other users\' posts " do

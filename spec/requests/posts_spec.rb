@@ -6,7 +6,6 @@ RSpec.describe "Posts", type: :request do
                                 "image/png")
     @post_image = fixture_file_upload("/home/ahmed/Desktop/i.png",
                                       "image/png")
-
     Ahmed = User.new(user_name: "Ahmed", email: "Ahmed@gmail.com",
                      phone_number: 8749387484, password: "123456",
                      password_confirmation: "123456")
@@ -18,26 +17,24 @@ RSpec.describe "Posts", type: :request do
                    password_confirmation: "123456")
     Ali.profile_picture = @post_image
     Ali.save()
-
     sign_in Ahmed
-    @post_by_ahmed = Post.create!(text: "This post is by Ahmed", image: @file,
-                                  user_id: Ahmed.id)
-
-    @post_by_ali = Post.new(text: "", user_id: Ali.id)
-    @post_by_ali.image.attach(io: File.open("/home/ahmed/Desktop/default.png"), filename: "default.png")
-    @post_by_ali.save()
     @post = {
       "text" => "this is the best post ever",
       "image" => "",
     }
     @p = {
       "text" => "",
-      "image" => Post.find(2).image,
+      "image" => @post_image,
     }
     @empty_post = {
       "text" => "",
       "image" => "",
     }
+    @post_by_ahmed = Post.create!(text: "This post is by Ahmed", image: @file,
+                                  user_id: Ahmed.id)
+
+    @post_by_ali = Post.create!(text: "this post is by Ali", image: @post_image,
+                                user_id: Ali.id)
   end
   describe "GET /index" do
     it "should response true" do
@@ -54,7 +51,7 @@ RSpec.describe "Posts", type: :request do
 
     it "should response true if user is not signed in" do
       sign_out Ahmed
-      get post_url(@post_by_ahmed)
+      get posts_url(@post)
       expect(response).to be_successful
     end
   end
@@ -85,13 +82,8 @@ RSpec.describe "Posts", type: :request do
     end
 
     it "should create post if user uploaded an image with no text " do
-      sign_out Ahmed
-      sign_in Ali
-      expect do
-        post posts_url, params: { post: @p }
-        expect(response).to be_successful
-        expect(response).to redirect_to(Post.last())
-      end
+      post posts_url, params: { post: @p }
+      expect(response).to redirect_to(Post.last())
     end
   end
 
