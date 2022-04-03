@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   delete "posts/:id/angry/:id", to: "angries#destroy", as: "remove_angry"
   #Heart
   resources :hearts, only: [:create, :destroy]
-  post "posts/:id/hearts", to: "hearts#create", as: "add_heart"
-  delete "posts/:id/hearts/:id", to: "hearts#destroy", as: "remove_heart"
+  post "posts/:id/hearts", to: "hearts#create", as: "add_hearts"
+  delete "posts/:id/hearts/:id", to: "hearts#destroy", as: "remove_hearts"
   #Sad
   post "posts/:id/sads", to: "sads#create", as: "add_sads"
   delete "posts/:id/sads/:id", to: "sads#destroy", as: "remove_sads"

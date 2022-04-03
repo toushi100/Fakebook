@@ -16,7 +16,7 @@
 
 <div class="btn btn-primary">
     <% if like.nil? %>
-      <%= button_to "Like", add_like_url, :class => "btn" %>
+      <%= button_to "Like", add_likes_url, :class => "btn" %>
     <% else %>
       <%= button_to "Dislike", remove_likes_url(like), method: :delete, :class => "btn" %>
   <% end %>
