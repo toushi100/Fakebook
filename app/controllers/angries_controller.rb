@@ -1,8 +1,10 @@
 class AngriesController < ApplicationController
     def create
-        @angry = current_user.angries.new(angry_params)
+        post = Post.find(params['id'])
+        @angry = post.angries.new()
+        @angry.user_id = current_user.id
         @angry.save()
-        redirect_to post_url(@angry.post_id)
+        redirect_to post_url(post)
     end
 
     def destroy

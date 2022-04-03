@@ -1,6 +1,8 @@
 class HeartsController < ApplicationController
     def create
-        @heart = current_user.hearts.new(heart_params)
+        post = Post.find(params['id'])
+        @heart = post.hearts.new()
+        @heart.user_id = current_user.id
         @heart.save()
         redirect_to post_url(@heart.post_id)
     end

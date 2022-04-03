@@ -1,6 +1,9 @@
 class WowsController < ApplicationController
     def create
-        @wow = current_user.wows.new(wow_params)
+        post = Post.find(params['id'])
+        @wow = post.wows.new()
+        @wow.user_id = current_user.id
+
         @wow.save()
         redirect_to post_url(@wow.post_id)
     end

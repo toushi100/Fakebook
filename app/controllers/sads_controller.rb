@@ -1,6 +1,9 @@
 class SadsController < ApplicationController
     def create
-        @sad = current_user.sads.new(sad_params)
+        post = Post.find(params['id'])
+        @sad = post.sads.new()
+        @sad.user_id = current_user.id
+
         @sad.save()
         redirect_to post_url(@sad.post_id)
     end
