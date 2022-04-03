@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!
-  before_action :authenticate_user!, only: [:create, :show, :index]
+  before_action :authenticate_user!, only: [:new,:create, :index]
   before_action :correct_user?, only: [:edit, :update, :destroy]
 
   @user = User.all
@@ -12,7 +11,6 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
-    
   end
 
   # GET /posts/new
@@ -26,19 +24,21 @@ class PostsController < ApplicationController
   end
 
   # POST /posts or /posts.json
-    def create
-      @post = current_user.posts.new(post_params)
+  def create
+    @post = current_user.posts.create(post_params)
+    p @post
 
-      respond_to do |format|
-        if @post.save
-          format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
-          format.json { render :show, status: :created, location: @post }
-        else
-          format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @post.errors, status: :unprocessable_entity }
-        end
+
+    respond_to do |format|
+      if @post.save
+        format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
+        format.json { render :show, status: :created, location: @post }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
+  end
 
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
@@ -65,19 +65,19 @@ class PostsController < ApplicationController
 
   def correct_user?
     @post = Post.find_by(id: params[:id])
-    
-    redirect_to post_url(@post), notice: "Cannot edit or delete others post" unless @post.user == current_user
 
+    redirect_to post_url(@post), notice: "Cannot edit or delete others post" unless @post.user == current_user
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def post_params
-      params.require(:post).permit(:text, :user_id, :comment, image: [])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def post_params
+    params.require(:post).permit(:text, :user_id, :comment, image: [])
+  end
 end
