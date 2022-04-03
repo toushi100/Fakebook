@@ -42,7 +42,7 @@
     <% if sad.nil? %>
       <%= button_to "Sad", add_sads_url, :class => "btn" %>
     <% else %>
-      <%= button_to "Undo", remove_sad_url(sad), method: :delete, :class => "btn" %>
+      <%= button_to "Undo", remove_sads_url(sad), method: :delete, :class => "btn" %>
   <% end %>
 </div>
 
