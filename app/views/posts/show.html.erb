@@ -8,11 +8,13 @@
 <%= render @post %>
 <p> <%= react = @post.likes.count + @post.hearts.count + @post.angries.count + @post.sads.count + @post.wows.count %> Reacts </p>
 <p> <%= @post.likes.count %> Likes <%= @post.hearts.count %> Love <%= @post.angries.count %> Angry <%= @post.sads.count %> Sad <%= @post.wows.count %> Wow </p>
+<%if signed_in?%>
 <% like = current_user.likes.find_by(post: @post) %>
 <% heart = current_user.hearts.find_by(post: @post) %>
 <% angry = current_user.angries.find_by(post: @post) %>
 <% sad = current_user.sads.find_by(post: @post) %>
 <% wow = current_user.wows.find_by(post: @post) %>
+<%end%>
 
 <div class="btn btn-primary">
     <% if like.nil? %>
