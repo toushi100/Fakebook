@@ -14,7 +14,7 @@ RSpec.describe "Angries", type: :request do
   describe "POST /angries" do
     it "should add an angry react" do
       post = Post.create!(text: "post text", user_id: Ahmed.id)
-      post angries_url(post)
+      post add_angry_url(post)
       expect(response).to redirect_to(post_url(post))
     end
   end
