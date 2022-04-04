@@ -48,6 +48,7 @@ gem 'activestorage-validator'
 
 #use RSpec for Testing
 gem 'rspec-rails'
+gem 'rails-controller-testing'
 # Use Sass to process CSS
 # gem "sassc-rails"
 gem 'bootstrap', '~> 5.1.3'
