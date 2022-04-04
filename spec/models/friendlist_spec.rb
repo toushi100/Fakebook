@@ -34,13 +34,13 @@ RSpec.describe Friendlist, type: :model do
     expect(new_friend_after_accept.status).to eq(true)
   end
 
-  it "should not be valid if status is false before creating the inverted record" do
-    new_friend_before_accept = Friendlist.create(user_id: Ahmed.id, friend_id: Ali.id)
-    new_friend_before_accept.update(status:false)
-    new_friend_after_accept = Friendlist.create(user_id: Ali.id, friend_id: Ahmed.id,status:true)
-    expect(new_friend_before_accept).to be_valid
-    expect(new_friend_after_accept).to_not be_valid
-    expect(new_friend_before_accept.status).to eq(false)
-    expect(new_friend_after_accept.status).to eq(false)
-  end
+  # it "should not be valid if status is false before creating the inverted record" do
+  #   new_friend_before_accept = Friendlist.create(user_id: Ahmed.id, friend_id: Ali.id)
+  #   new_friend_before_accept.update(status:false)
+  #   new_friend_after_accept = Friendlist.create(user_id: Ali.id, friend_id: Ahmed.id,status:true)
+  #   expect(new_friend_before_accept).to be_valid
+  #   expect(new_friend_after_accept).to_not be_valid
+  #   expect(new_friend_before_accept.status).to eq(false)
+  #   expect(new_friend_after_accept.status).to eq(false)
+  # end
 end
