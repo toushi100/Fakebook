@@ -1,36 +1,23 @@
 class UsersController < ApplicationController
   def index #should be removed (3ashan da msh mawgood fel mawqe3 elli by2aldona feeh elli esmo facebook )
-    if signed_in?
-      @users = User.all
-    else
-      redirect_to new_user_session_url
-    end
+    @users = User.all
   end
-
   def show
-    if params[:id]
-      @user = User.find_by_id(params[:id])
-    else
-      redirect_to home_url, notice: "something went wrong please try again later"
-    end
+    @user = User.find_by_id(params[:id])
   end
-
   def send_friend_request
-    if signed_in?
-      @newfriend = Friendlist.new
-      @newfriend.user_id = current_user.id
-      @temp = User.find(params[:id])
-      @newfriend.friend_id = @temp.id
-      @newfriend.save
-      redirect_to users_index_url
-    else
-      redirect_to new_user_session_url
-    end
+    @newfriend = Friendlist.new
+    @newfriend.user_id = current_user.id
+    @temp = User.find(params[:id])
+    @newfriend.friend_id = @temp.id
+    @newfriend.save
+    redirect_to users_index_url
+    # Notification for friend request
   end
 
   def accept_friend_request
     @accept = Friendlist.find_by_friend_id(params[:id])
-    @accept.update_attribute(:status, true)
+    @accept.update_attribute(:status , true)
     @invertfriend = Friendlist.new
     @invertfriend.user_id = current_user.id
     @temp = User.find(params[:id])
@@ -40,7 +27,6 @@ class UsersController < ApplicationController
   end
 
   def remove_friend_request
-    p params
     Friendlist.find_by_friend_id(params[:id]).delete
     redirect_to user_url(current_user)
   end
@@ -58,18 +44,18 @@ class UsersController < ApplicationController
     @block.user_id = current_user.id
     @temp = User.find(params[:id])
     @block.blocked_friend_id = @temp.id
-
+    
     @block.save
 
     @block = BlockList.new
-
+    
     @temp = User.find(params[:id])
     @block.user_id = @temp.id
     @block.blocked_friend_id = current_user.id
     @block.blocked_status = true
-
+    
     @block.save
-
+    
     self.remove_friend
   end
 
@@ -78,4 +64,5 @@ class UsersController < ApplicationController
     BlockList.find_by_user_id(params[:id]).delete
     redirect_to user_url(current_user)
   end
+
 end
