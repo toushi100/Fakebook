@@ -1,8 +1,145 @@
-<h1>  You can view your own data only</h1>
+<!DOCTYPE html>
+<html>
+<style>
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 50;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
 
-<%if @user.profile_picture.representable?%>
+.left {
+  left: 0;
+}
+
+.right {
+  right: 0;
+}
+</style>
+
+
+
+<h1>  You can view your own data only</h1>
+<br>
+<div class="split left">
+
       <%= image_tag @user.profile_picture , size: "200x200" %>
-<%end%> 
-<h1>Name : <%= @user.user_name %></h1>
-<h5>Phone Number : <%= @user.phone_number%></h5>
-<h5>Email : <%= @user.email%></h5>
+      
+      <h1>Name : <%= @user.user_name %></h1>
+      <h5>Phone Number : <%= @user.phone_number%></h5>
+      <h5>Email : <%= @user.email%></h5>
+      <br>
+      <br>
+      <br>
+      <a href='http://localhost:3000/users'></i>Find Friends</a>
+
+</div>
+
+
+<div class="split right">
+
+      <h1>Friends Table</h1>
+      <table>
+            <thead>
+                  <tr>
+                  <th> ID </th>
+                  <th> Name </th>
+                  <th> Delete el wad da </th>
+                  <th> Block el wad da </th>
+                  </tr>
+
+            </thead>
+            <% @user.friendlists.each do |friend| %>
+            <tbody>
+                  <tr>
+                        <% if friend.status == true %>
+                              <td><%=friend.friend_id %></td>
+                              <% temp = User.find(friend.friend_id)%>
+                              <td> <%= temp.user_name%> </td>
+                              <td> <%= button_to 'Remove Friend', remove_friend_path(current_user.id), method: :delete %> </td>
+                              <td> <%= button_to 'Block Friend', block_friend_path(friend.friend_id)%> </td>
+                        <%end%>
+                  </tr>
+            </tbody>
+            <%end%>
+      </table>
+      <h1>Pending Requests</h1>
+      <table>
+            <thead>
+                  <tr>
+                  <th> ID </th>
+                  <th> Name </th>
+                  </tr>
+
+            </thead>
+              </thead>
+            <% @user.friendlists.each do |friend| %>
+            <tbody>
+                  <tr>
+                        <% if friend.status == false %>
+                              <td><%=friend.friend_id %></td>
+                              <% temp = User.find(friend.friend_id)%>
+                              <td> <%= temp.user_name%> </td>
+                        <%end%>
+                  </tr>
+            </tbody>
+            <%end%>
+      </table>
+
+      
+      <h1>Received Requests</h1>
+      <table>
+            <thead>
+                  <tr>
+                  <th> ID </th>
+                  <th> Name </th>
+                  <th> ?? </th>
+                  </tr>
+
+            </thead>
+              </thead>
+            
+            <tbody>
+                  
+                  <%temp = @user.requests_received%>
+                  <% temp.map { |user| %>
+                  <tr>
+                        <td>  <%= user.id %>          </td>
+                        <td>  <%= user.user_name %>   </td>
+                        <td> <%= button_to 'Accept Friend Request', accept_friend_request_path(current_user.id) %> </td>
+                        <td> <%= button_to 'Remove Friend Request', remove_friend_request_path(current_user.id), method: :delete %> </td>
+                  </tr>
+                  <% }.join("\n ") %>
+            </tbody>
+      </table>
+
+
+      <h1>Blocked Friends Table</h1>
+      <table>
+            <thead>
+                  <tr>
+                  <th> ID </th>
+                  <th> Name </th>
+                  <th> elly haydos hena mohaza2</th>
+                  </tr>
+
+            </thead>
+            <% @user.block_lists.each do |friend| %>
+            <tbody>
+                  <tr>
+                        <%if friend.blocked_status == false%>
+                              <td><%=friend.blocked_friend_id %></td>
+                              <% temp = User.find(friend.blocked_friend_id)%>
+                              <td> <%= temp.user_name%> </td>
+                              <td> <%= button_to 'Un Block', un_block_friend_path(friend.blocked_friend_id), method: :delete %> </td>
+                        <%end%>
+                  </tr>
+            </tbody>
+            <%end%>
+      </table>
+</div>
+
+</html>

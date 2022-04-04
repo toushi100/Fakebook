@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
-  get "comments/index"
 
+  get 'users/index'
+  devise_for :users, controllers: {  sessions: 'users/sessions'  }
+  devise_scope :user do
+    get "/users/sign_out" => "devise/sessions#destroy"
+  end
+
+  get "comments/index"
   resources :posts do
     resources :comments
   end
@@ -24,18 +30,14 @@ Rails.application.routes.draw do
   # Comment Delete and Update Routes
   delete "posts/:id/comment/:id", to: "comments#destroy_comment", as: "destroy_comment"
   put "posts/:id/comments/:id", to: "comments#update_comment", as: "update_comment"
-
   get "users/index"
-  devise_for :users, controllers: {
-                       sessions: "users/sessions",
-                     }
-  devise_scope :user do
-    get "/users/sign_out" => "devise/sessions#destroy"
-  end
-  match "/users", to: "users#index", via: "get"
-  resources :users, :only => [:show]
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  match '/users',   to: 'users#index',   via: 'get'
+  post 'users/send_friend_request/:id', to: 'users#send_friend_request', as: 'send_friend_request'
+  delete 'users/remove_friend_request/:id', to: 'users#remove_friend_request', as: 'remove_friend_request'
+  delete 'users/remove_friend/:id', to: 'users#remove_friend', as: 'remove_friend'
+  post 'users/block_friend/:id', to: 'users#block_friend', as: 'block_friend'
+  delete 'users/un_block_friend/:id', to: 'users#un_block_friend', as: 'un_block_friend'
+  post 'users/accept_friend_request/:id', to: 'users#accept_friend_request', as: 'accept_friend_request'
+  resources :users, :only =>[:show]
   root to: "home#index"
-  # Defines the root path route ("/")
-  # root "articles#index"
 end
