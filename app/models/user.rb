@@ -14,6 +14,12 @@ class User < ApplicationRecord
   has_many :blocked_friend, through: :block_lists
 
   has_and_belongs_to_many :events_invites, class_name: 'Event'
+
+  has_many :event_interests
+  has_many :interest_events, through: :event_interests, source: :event
+
+  has_many :event_going_users
+  has_many :going_to_events, through: :event_going_users, source: :event
   # Validations 
 
 
