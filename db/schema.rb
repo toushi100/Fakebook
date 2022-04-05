@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema[7.0].define(version: 2022_03_30_174156) do
-=======
 ActiveRecord::Schema[7.0].define(version: 2022_04_02_185728) do
->>>>>>> Development
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -83,7 +79,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_02_185728) do
     t.index ["user_id"], name: "index_friendlists_on_user_id"
   end
 
-<<<<<<< HEAD
   create_table "groups", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -92,14 +87,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_02_185728) do
     t.index ["created_by_id"], name: "index_groups_on_created_by_id"
   end
 
-  create_table "user_groups", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "group_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["group_id"], name: "index_user_groups_on_group_id"
-    t.index ["user_id"], name: "index_user_groups_on_user_id"
-=======
   create_table "hearts", force: :cascade do |t|
     t.integer "post_id", null: false
     t.integer "user_id", null: false
@@ -136,7 +123,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_02_185728) do
     t.index ["post_id"], name: "index_sads_on_post_id"
     t.index ["user_id", "post_id"], name: "index_sads_on_user_id_and_post_id", unique: true
     t.index ["user_id"], name: "index_sads_on_user_id"
->>>>>>> Development
+  end
+
+  create_table "user_groups", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_user_groups_on_group_id"
+    t.index ["user_id"], name: "index_user_groups_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -169,11 +164,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_02_185728) do
   add_foreign_key "angries", "users"
   add_foreign_key "block_lists", "users"
   add_foreign_key "block_lists", "users", column: "blocked_friend_id"
-<<<<<<< HEAD
-=======
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
->>>>>>> Development
   add_foreign_key "friendlists", "users"
   add_foreign_key "friendlists", "users", column: "friend_id"
   add_foreign_key "hearts", "posts"

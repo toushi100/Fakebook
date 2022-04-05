@@ -46,10 +46,10 @@ Rails.application.routes.draw do
   #                    GROUPS ROUTES
   
 
-  get 'groups/index', to: 'groups#index' ,as: 'groups'
-  post 'groups/index', to: 'groups#create'
+  get 'groups', to: 'groups#index' ,as: 'groups'
+  post 'groups/index', to: 'groups#create',as: 'groups_create'
   get 'groups/new', to: 'groups#new'
-  post 'groups/add_user_to_group/:id', to: 'groups#add_user_to_group' , as: 'add_user_to_group'
+  post 'groups/join_group/:id', to: 'groups#join_group' , as: 'join_group'
   delete 'groups/remove_user_from_group/:id', to: 'groups#remove_user_from_group' , as: 'remove_user_from_group'
   delete 'groups/delete/:id', to: 'groups#delete' , as: 'delete'
 

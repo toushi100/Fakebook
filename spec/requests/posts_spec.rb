@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "Posts", type: :request do
-  before do
+  context do
     @file = fixture_file_upload("/home/ahmed/Desktop/default.png",
                                 "image/png")
     @post_image = fixture_file_upload("/home/ahmed/Desktop/i.png",
