@@ -12,6 +12,8 @@ class User < ApplicationRecord
 
   has_many :block_lists
   has_many :blocked_friend, through: :block_lists
+
+  has_and_belongs_to_many :events_invites, class_name: 'Event'
   # Validations 
 
 
