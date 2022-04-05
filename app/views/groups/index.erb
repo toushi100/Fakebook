@@ -1,0 +1,16 @@
+<h1> Groups</h1>
+
+<%@groups.each do |group|%>
+    <div class="card">
+        <p>
+            <strong style="color : Red" class="card-title" >Name :</strong>
+            <%= group.name %>
+        </p>
+
+        <% group.users.each do |members|%>
+            <h6> Member id : <%= members.id%> , Member Name : <%= members.user_name%></h6>
+            <h5>  </h5>
+        <%end%>
+    </div>
+
+<%end%>

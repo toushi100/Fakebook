@@ -79,6 +79,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_02_185728) do
     t.index ["user_id"], name: "index_friendlists_on_user_id"
   end
 
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "created_by_id"
+    t.index ["created_by_id"], name: "index_groups_on_created_by_id"
+  end
+
   create_table "hearts", force: :cascade do |t|
     t.integer "post_id", null: false
     t.integer "user_id", null: false
@@ -115,6 +123,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_02_185728) do
     t.index ["post_id"], name: "index_sads_on_post_id"
     t.index ["user_id", "post_id"], name: "index_sads_on_user_id_and_post_id", unique: true
     t.index ["user_id"], name: "index_sads_on_user_id"
+  end
+
+  create_table "user_groups", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_user_groups_on_group_id"
+    t.index ["user_id"], name: "index_user_groups_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

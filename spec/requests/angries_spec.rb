@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Angries", type: :request do
-  before do
+  context do
     @file = fixture_file_upload("/home/ahmed/Desktop/default.png", "image/png")
     Ahmed = User.create!(user_name: "Ahmed", email: "Ahmed@g.com",
                          phone_number: 19170373200, profile_picture: @file,

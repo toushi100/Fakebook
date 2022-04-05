@@ -12,6 +12,9 @@ class User < ApplicationRecord
   # Blocklist Association
   has_many :block_lists
   has_many :blocked_friend, through: :block_lists
+  #user group
+  has_many :user_groups
+  has_many :groups, through: :user_groups
   # Post Associations
   has_many :posts, dependent: :destroy
   has_many :comments

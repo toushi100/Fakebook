@@ -1,14 +1,13 @@
 class UsersController < ApplicationController
-  def index #should be removed (3ashan da msh mawgood fel mawqe3 elli by2aldona feeh elli esmo facebook )
-    if user_signed_in?
-      @users = User.all
-    else
-      redirect_to new_user_session_url
-    end
+  before_action :authenticate_user!
+  
+  def index
+    @users = User.all
   end
 
   def show
     @user = User.find_by_id(params[:id])
+    @groups = Group.all
   end
 
   def send_friend_request
