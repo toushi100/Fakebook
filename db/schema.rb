@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_29_022655) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_05_111955) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,6 +39,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_29_022655) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "audiences", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "block_lists", force: :cascade do |t|
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
@@ -47,6 +53,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_29_022655) do
     t.boolean "blocked_status", default: false
     t.index ["blocked_friend_id"], name: "index_block_lists_on_blocked_friend_id"
     t.index ["user_id"], name: "index_block_lists_on_user_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "date", default: "2022-04-05 11:20:54"
+    t.string "description"
+    t.boolean "online_InPerson", null: false
+    t.boolean "post_permission", default: true
+    t.boolean "invite_permission", default: true
+    t.string "location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "friendlists", force: :cascade do |t|
