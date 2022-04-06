@@ -31,6 +31,9 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        message = "#{current_user.user_name} added a new post"
+        scope = current_user.friends
+        SendNotificationsJob.perform_now({:message => message, :scope => scope})
         format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
