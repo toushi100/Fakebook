@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'users/index'
   devise_for :users, controllers: {  sessions: 'users/sessions'  }
   devise_scope :user do
-    get '/users/sign_out' => 'devise/sessions#destroy'
+    get "/users/sign_out" => "devise/sessions#destroy"
   end
 
 
@@ -23,7 +23,6 @@ Rails.application.routes.draw do
   end
 
   get "comments/index"
-
   resources :posts do
     resources :comments
   end
@@ -47,6 +46,5 @@ Rails.application.routes.draw do
   # Comment Delete and Update Routes
   delete "posts/:id/comment/:id", to: "comments#destroy_comment", as: "destroy_comment"
   put "posts/:id/comments/:id", to: "comments#update_comment", as: "update_comment"
-
   root to: "home#index"
 end
