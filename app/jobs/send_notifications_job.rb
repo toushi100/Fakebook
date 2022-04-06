@@ -4,7 +4,9 @@ class SendNotificationsJob < ApplicationJob
   def perform(p)
     p[:scope].each {|user|
       Notification.create(user_id: user.id, Message: p[:message])
-      # RemoveOldNotificationJob.perform_now(user: user)
+      if Notification.where(user_id: user.id).count > 20
+        Notification.first.destroy
+      end
     }
   end
 end
