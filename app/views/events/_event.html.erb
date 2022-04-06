@@ -15,23 +15,66 @@
   </p>
 
   <p>
-    <strong>Online inperson:</strong>
-    <%= event.online_InPerson %>
+    <% if event.online_InPerson %>
+      <strong>Online</strong>
+    <% else %>
+      <strong> In Person</strong>
+    <% end %>
   </p>
 
   <p>
-    <strong>Post permission:</strong>
-    <%= event.post_permission %>
+    <strong>Privacy:</strong>
+    <%= event.privacy %>
   </p>
-
-  <p>
-    <strong>Invite permission:</strong>
-    <%= event.invite_permission %>
-  </p>
+  
 
   <p>
     <strong>Location:</strong>
     <%= event.location %>
   </p>
+
+  <p>
+    <strong>Going</strong>
+    <%= event.going.count%>
+    <% @going.each do |friend| %>
+      <div>
+        <%= friend.user_name %>
+    </div>
+    <%end%>
+  </p>
+
+  <p>
+    <strong>Interested</strong>
+    <%= event.interested.count%>
+    <% @interested.each do |friend| %>
+      <div>
+        <%= friend.user_name %>
+      </div>
+    <%end%>
+  </p>
+
+  <% unless @event == nil %>
+    <% status = nil %>
+    <% if @event.going.include?(current_user)%>
+      <% status = "Going" %>
+    <% elsif @event.interested.include?(current_user) %>
+      <% status = "Interested" %>
+    <%end%>
+    <strong><%= status %></strong>
+    <% unless status == "Going" %>
+      <%= button_to "Going", event_going_path(event_id: @event.id), method: :post %>
+    <%end%>
+    <% puts @status %>
+    <% unless status == "Interested" %>
+      <%= button_to "Interested", event_interested_path(event_id: @event.id), method: :post %>
+    <%end%>
+    <% unless status == nil %>
+      <%if current_user.invited_to_events.include?(@event) %>
+        <%= button_to "Not going", event_delete_invitation, method: :delete %>
+      <%else%>
+        <%= button_to "Not going", event_delete_response_path(event_id: @event.id), method: :delete %>
+      <%end%>
+    <%end%>
+  <%end%>
 
 </div>

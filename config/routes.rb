@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :events
   get 'users/index'
   devise_for :users, controllers: {  sessions: 'users/sessions'  }
   devise_scope :user do
@@ -16,6 +15,12 @@ Rails.application.routes.draw do
   post 'users/accept_friend_request/:id', to: 'users#accept_friend_request', as: 'accept_friend_request'
   resources :users, :only =>[:show]
 
+  resources :events do  
+    post 'going', to: 'events#save_going', as: 'going'
+    post 'interested', to: 'events#save_interested', as: 'interested'
+    delete 'delete_invitation', to: 'events#delete_invitation', as: 'delete_invitation'
+    delete 'delete_response', to: 'events#delete_response', as: 'delete_response'
+  end
 
   root to: "home#index"
 end

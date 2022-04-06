@@ -3,6 +3,8 @@
 <h1>Events</h1>
 
 <div id="events">
+  <%@going=[]%>
+  <%@interested=[]%>
   <% @events.each do |event| %>
     <%= render event %>
     <p>

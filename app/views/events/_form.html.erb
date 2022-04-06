@@ -32,13 +32,8 @@
   </div>
 
   <div>
-    <%= form.label :post_permission, style: "display: block" %>
-    <%= form.check_box :post_permission %>
-  </div>
-
-  <div>
-    <%= form.label :invite_permission, style: "display: block" %>
-    <%= form.check_box :invite_permission %>
+    <%= form.label :privacy, style: "display: block" %>
+    <%= form.select :privacy, ["public", "friends", "friends_except", "only_me"] %>
   </div>
 
   <div>
