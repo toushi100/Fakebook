@@ -1,4 +1,11 @@
 <%if user_signed_in?%>
+    <%notifications = Notification.where(user_id: current_user.id, Viewed: false)%>
+    <% if notifications.count > 0 %>
+        <strong>
+        <%= link_to 'New Notifications: ', show_notifications_url(user_id: current_user.id),method: :get  %>
+        <%= notifications.count %> 
+    </strong>
+    <%end%>
     <h1>Hello, <%= current_user.user_name %></h1>
 <%else%>
     <h1>Hello, Please Sign In</h1>
