@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_02_185728) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_05_152109) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,6 +39,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_02_185728) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "angries", force: :cascade do |t|
+    t.integer "post_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_angries_on_post_id"
+    t.index ["user_id", "post_id"], name: "index_angries_on_user_id_and_post_id", unique: true
+    t.index ["user_id"], name: "index_angries_on_user_id"
+  end
+
   create_table "block_lists", force: :cascade do |t|
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
@@ -47,6 +57,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_02_185728) do
     t.boolean "blocked_status", default: false
     t.index ["blocked_friend_id"], name: "index_block_lists_on_blocked_friend_id"
     t.index ["user_id"], name: "index_block_lists_on_user_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.integer "post_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "event_going_users", force: :cascade do |t|
@@ -89,46 +109,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_02_185728) do
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_events_users_on_event_id"
     t.index ["user_id"], name: "index_events_users_on_user_id"
-  end
-
-  create_table "friendlists", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "friend_id"
-    t.boolean "status", default: false
-    t.index ["friend_id"], name: "index_friendlists_on_friend_id"
-    t.index ["user_id"], name: "index_friendlists_on_user_id"
-  end
-  
-  create_table "angries", force: :cascade do |t|
-    t.integer "post_id", null: false
-    t.integer "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_angries_on_post_id"
-    t.index ["user_id", "post_id"], name: "index_angries_on_user_id_and_post_id", unique: true
-    t.index ["user_id"], name: "index_angries_on_user_id"
-  end
-
-  create_table "block_lists", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "blocked_friend_id"
-    t.boolean "blocked_status", default: false
-    t.index ["blocked_friend_id"], name: "index_block_lists_on_blocked_friend_id"
-    t.index ["user_id"], name: "index_block_lists_on_user_id"
-  end
-
-  create_table "comments", force: :cascade do |t|
-    t.text "content"
-    t.integer "post_id", null: false
-    t.integer "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_comments_on_post_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "friendlists", force: :cascade do |t|
@@ -228,6 +208,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_02_185728) do
   add_foreign_key "block_lists", "users", column: "blocked_friend_id"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "events", "users"
   add_foreign_key "friendlists", "users"
   add_foreign_key "friendlists", "users", column: "friend_id"
   add_foreign_key "hearts", "posts"
