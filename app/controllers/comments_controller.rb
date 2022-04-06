@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :correct_user?, only: [:destroy_comment]
+before_action :authenticate_user!, only: [:create]
 
-  @comments = Comment.all
 
   def create
     if current_user != nil

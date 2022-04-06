@@ -1,17 +1,92 @@
-<div id="<%= dom_id post %>">
-  <p>
-    <strong>Text:</strong>
-    <%= post.text %>
-  </p>
+<%if signed_in?%>
+  <% like = current_user.likes.find_by(post: post) %>
+  <% heart = current_user.hearts.find_by(post: post) %>
+  <% angry = current_user.angries.find_by(post: post) %>
+  <% sad = current_user.sads.find_by(post: post) %>
+  <% wow = current_user.wows.find_by(post: post) %>
+<%end%>
 
-  <%# <p>
-    <strong>Comment:</strong>
-    <%= render post.comments %>
-  <%# </p> %> 
+  <div class="card mt-2 p-0">
+    <div class="card-header bg-white border-bottom-0">
+      <div class="row">
+        <div class="col-10">
+          <%= image_tag current_user.profile_picture,class:"rounded-circle mr-2",style:"max-width:8%;"%>
+          <strong class="ml-2"style="color:#4267B2;"><a href="<%= user_url(current_user)%>"><%=current_user.user_name%></a></strong>
+        </div>
+        <div class="col-1 p-0 m-0">
+          <% if current_user == post.user%>
+            <%= link_to post_path(post), method: :delete   do %>
+              <%=image_tag 'trash.svg',style:"max-width:17px;",style:"max-width:17px;",class:"p-0 "%>
+            <%end%>
+          </div>
+          <div class="col-1 m-0 p-0">
+            <%= link_to  edit_post_path(post)  do %>
+              <%=image_tag 'edit.svg',style:"max-width:17px;",style:"max-width:17px;",class:"p-0 "%>
+            <%end%>
+          <%end%>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p class="card-text">  <%= post.text %></p>
+      <% post.image.each do |i| %>
+        <%= image_tag(i,class:"w-100 m-0 p-0") %>
+      <% end %>
+      <div class="card-header mb-2">
+        <%= react = post.likes.count + post.hearts.count + post.angries.count + post.sads.count + post.wows.count %> <%=image_tag 'like.svg',style:"max-width:17px;",style:"max-width:17px;"%>
+      </div>
+      <div class="col">
+        <% if like.nil? %>
+          <%= link_to  add_likes_url(post), method: :post do%>
+            <%= image_tag 'like1.svg',style:"max-width:17px;"%>
+          <%end%>
+        <% else %>
+          <%= link_to  remove_likes_url(like), method: :delete do%>
+            <%= image_tag 'like1.svg',style:"max-width:17px;"%>
+          <%end%>
+        <% end %>
+     
+        <% if heart.nil? %>
+          <%= link_to(  add_hearts_url(post),method: :post) do%>
+            <%= image_tag 'hearts.svg',style:"max-width:17px;"%>
+          <%end%>
+        <% else %>
+          <%= link_to  remove_hearts_url(heart), method: :delete do%>
+            <%= image_tag 'hearts.svg',style:"max-width:17px;"%>
+          <%end%>
+        <% end %>
+      
+        <% if angry.nil? %>
+          <%= link_to  add_angry_url(post),method: :post do%>
+            <%= image_tag 'angry.svg',style:"max-width:17px;"%>
+          <%end%>
+        <% else %>
+          <%= link_to  remove_angry_url(angry), method: :delete do%>
+            <%= image_tag 'angry.svg',style:"max-width:17px;"%>
+          <%end%>
+        <% end %>
+     
+        <% if sad.nil? %>
+          <%= link_to  add_sads_url(post),method: :post do%>
+            <%= image_tag 'sad.svg',style:"max-width:17px;"%>
+          <%end%>
+        <% else %>
+          <%= link_to  remove_sads_url(sad), method: :delete do%>
+            <%= image_tag 'sad.svg',style:"max-width:17px;"%>
+          <%end%>
+        <% end %>
+      
+        <% if wow.nil? %>
+          <%= link_to  add_wows_url(post),method: :post do%>
+            <%= image_tag 'as.svg',style:"max-width:17px;"%>
+          <%end%>
+        <% else %>
+          <%= link_to  remove_wows_url(wow), method: :delete do%>
+            <%= image_tag 'as.svg',style:"max-width:17px;"%>
+          <%end%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  
 
-  <%# <p>
-    <strong>Image:</strong>
-    <%= link_to post.image.filename, post.image if post.image.attached? %>
-  <%# </p> %> 
-
-</div>

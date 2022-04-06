@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, only: [:new,:create, :index]
+  before_action :authenticate_user!, only: [:new, :create, :index]
   before_action :correct_user?, only: [:edit, :update, :destroy]
 
   @user = User.all
@@ -25,10 +25,10 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
-    @post = current_user.posts.create(post_params)
-    p @post
-
-
+    @post = current_user.posts.new()
+    @post.text = params[:text]
+    @post.image = params[:image]
+    @post.save
     respond_to do |format|
       if @post.save
         format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
@@ -56,11 +56,6 @@ class PostsController < ApplicationController
   # DELETE /posts/1 or /posts/1.json
   def destroy
     @post.destroy
-
-    respond_to do |format|
-      format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
-      format.json { head :no_content }
-    end
   end
 
   def correct_user?

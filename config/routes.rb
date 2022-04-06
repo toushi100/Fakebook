@@ -53,5 +53,5 @@ Rails.application.routes.draw do
   delete 'groups/remove_user_from_group/:id', to: 'groups#remove_user_from_group' , as: 'remove_user_from_group'
   delete 'groups/delete/:id', to: 'groups#delete' , as: 'delete'
 
-  root to: "home#index"
+  root to: "home#index", as: "home"
 end

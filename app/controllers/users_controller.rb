@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by_id(params[:id])
+    @posts = current_user.posts
     @groups = Group.all
   end
 
