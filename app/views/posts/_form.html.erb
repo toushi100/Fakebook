@@ -1,28 +1,18 @@
-<%= form_with(model: post) do |form| %>
-  <% if post.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-      <ul>
-        <% post.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<%= form_with url: posts_url,method: :post do |form| %>
+  <div class="form-group">
+    <div>
+      <%= form.text_area :text,placeholder:"Say something inspiring to your Fake Friends",class:"form-control" %>
     </div>
-  <% end %>
-
-  <div>
-    <%= form.label :text, style: "display: block" %>
-    <%= form.text_field :text %>
   </div>
+  <div class="row">
+    <div class="col">
 
-  <div>
-    <%= form.label :image, style: "display: block" %>
-    <%= form.file_field :image, multiple:true %>
-  </div>
-  
+        <%= form.file_field :image, multiple:true ,class:"form-control"%>
+      </div>
 
-  <div>
-    <%= form.submit %>
+      <div class="col">
+        <%= form.submit 'Post' ,class:"form-control text-white" ,style:"background-color:#4267B2;"%>
+      </div>
+    
   </div>
 <% end %>
