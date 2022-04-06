@@ -11,6 +11,9 @@
   </head>
 
   <body>
+    <%if user_signed_in?%>
+        <%= link_to ' Notifications: ', show_notifications_url(user_id: current_user.id),method: :get  %>
+    <%end%>
     <%# <%= render "layouts/posts_layout" %> 
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
