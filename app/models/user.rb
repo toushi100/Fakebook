@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  after_save :profile_privacy
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_one_attached :profile_picture
@@ -42,6 +44,11 @@ class User < ApplicationRecord
 
   # Notification
   has_many :notifications, dependent: :destroy
+
+  # Profile Privacy
+  has_one :privacy, dependent: :destroy, class_name: 'ProfilePrivacy'
+
+  #validates :profile_privacy, presence: true
   
   # Validations 
 
@@ -71,4 +78,11 @@ class User < ApplicationRecord
       )
     end
   end
+
+  def profile_privacy
+    
+    user = User.last
+    user.privacy = ProfilePrivacy.create
+  end
+  
 end
