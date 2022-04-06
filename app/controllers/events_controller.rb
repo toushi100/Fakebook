@@ -41,6 +41,9 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
+        message = "#{current_user.user_name} added new event #{@event.name}"
+        scope = @event.privacy == "only_me" ? [] : current_user.friends
+        SendNotificationsJob.perform_now({:message => message, :scope => scope})
         format.html { redirect_to event_url(@event), notice: "Event was successfully created." }
         format.json { render :show, status: :created, location: @event }
       else
