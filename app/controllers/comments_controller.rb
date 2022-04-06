@@ -10,6 +10,9 @@ class CommentsController < ApplicationController
       @comment.content = params["comment"]["content"]
       @comment.user_id = current_user.id
       @comment.save()
+      message = "#{current_user.user_name} commented on a #{@post.user.user_name}'s post"
+      scope = current_user.friends
+      SendNotificationsJob.perform_now({:message => message, :scope => scope})
       redirect_to post_url(@post)
     else
       redirect_to new_user_session_url
