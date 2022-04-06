@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
+  #                 USERS ROUTES
+
   get 'users/index'
   devise_for :users, controllers: {  sessions: 'users/sessions'  }
   devise_scope :user do
     get "/users/sign_out" => "devise/sessions#destroy"
   end
-
+ 
+  # Friends routes
 
   match '/users',   to: 'users#index',   via: 'get'
   post 'users/send_friend_request/:id', to: 'users#send_friend_request', as: 'send_friend_request'
@@ -14,6 +17,8 @@ Rails.application.routes.draw do
   delete 'users/un_block_friend/:id', to: 'users#un_block_friend', as: 'un_block_friend'
   post 'users/accept_friend_request/:id', to: 'users#accept_friend_request', as: 'accept_friend_request'
   resources :users, :only =>[:show]
+
+  # Events routes
 
   resources :events do  
     post 'going', to: 'events#save_going', as: 'going'
@@ -46,5 +51,17 @@ Rails.application.routes.draw do
   # Comment Delete and Update Routes
   delete "posts/:id/comment/:id", to: "comments#destroy_comment", as: "destroy_comment"
   put "posts/:id/comments/:id", to: "comments#update_comment", as: "update_comment"
+
+
+  #                    GROUPS ROUTES
+  
+
+  get 'groups', to: 'groups#index' ,as: 'groups'
+  post 'groups/index', to: 'groups#create',as: 'groups_create'
+  get 'groups/new', to: 'groups#new'
+  post 'groups/join_group/:id', to: 'groups#join_group' , as: 'join_group'
+  delete 'groups/remove_user_from_group/:id', to: 'groups#remove_user_from_group' , as: 'remove_user_from_group'
+  delete 'groups/delete/:id', to: 'groups#delete' , as: 'delete'
+
   root to: "home#index"
 end

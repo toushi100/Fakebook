@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema[7.0].define(version: 2022_04_02_185728) do
-
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -113,6 +111,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_02_185728) do
     t.index ["user_id"], name: "index_angries_on_user_id"
   end
 
+  create_table "block_lists", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "blocked_friend_id"
+    t.boolean "blocked_status", default: false
+    t.index ["blocked_friend_id"], name: "index_block_lists_on_blocked_friend_id"
+    t.index ["user_id"], name: "index_block_lists_on_user_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.text "content"
     t.integer "post_id", null: false
@@ -121,6 +129,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_02_185728) do
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "friendlists", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "friend_id"
+    t.boolean "status", default: false
+    t.index ["friend_id"], name: "index_friendlists_on_friend_id"
+    t.index ["user_id"], name: "index_friendlists_on_user_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "created_by_id"
+    t.index ["created_by_id"], name: "index_groups_on_created_by_id"
   end
 
   create_table "hearts", force: :cascade do |t|
@@ -161,6 +187,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_02_185728) do
     t.index ["user_id"], name: "index_sads_on_user_id"
   end
 
+  create_table "user_groups", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_user_groups_on_group_id"
+    t.index ["user_id"], name: "index_user_groups_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -187,15 +222,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_02_185728) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "block_lists", "users"
-  add_foreign_key "block_lists", "users", column: "blocked_friend_id"
-  add_foreign_key "events", "users"
-  add_foreign_key "friendlists", "users"
-  add_foreign_key "friendlists", "users", column: "friend_id"
   add_foreign_key "angries", "posts"
   add_foreign_key "angries", "users"
+  add_foreign_key "block_lists", "users"
+  add_foreign_key "block_lists", "users", column: "blocked_friend_id"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "friendlists", "users"
+  add_foreign_key "friendlists", "users", column: "friend_id"
   add_foreign_key "hearts", "posts"
   add_foreign_key "hearts", "users"
   add_foreign_key "likes", "posts"
@@ -205,5 +239,4 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_02_185728) do
   add_foreign_key "sads", "users"
   add_foreign_key "wows", "posts"
   add_foreign_key "wows", "users"
-
 end

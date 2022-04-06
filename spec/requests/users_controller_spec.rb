@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "UsersControllers", type: :request do
-  before do
+  context do
     @file = fixture_file_upload("/home/ahmed/Desktop/i.png", "")
     Ahmed = User.create!(user_name: "Ahmed", email: "Ahmed@gmail.com",
                          phone_number: 9033453648, profile_picture: @file,

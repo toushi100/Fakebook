@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "Comments", type: :request do
-  before do
+  context do
     @file = fixture_file_upload("/home/ahmed/Desktop/default.png",
                                 "image/png")
     Ahmed = User.new(user_name: "Ahmed", email: "Ahmed@gmail.com",
