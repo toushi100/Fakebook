@@ -51,7 +51,7 @@
         <%if user_signed_in?%>
         <nav id="navbar" class="navbar">
           <ul class="text-white">
-            <li><a href="../posts" class="text-white"> Posts</a></li>
+            <li><a href="../posts" class="text-white"> Timeline</a></li>
             <%notifications = Notification.where(user_id: current_user.id, viewed: false)%>
             
             <li class="dropdown"><a href="../notifications/<%=current_user.id%>"><span class="text-white">
@@ -71,11 +71,13 @@
                 
               </ul>
             </li>
+            <li><a href='../users'class="text-white"></i>Find Friends</a></li>
+            <li><a href="../groups" class="text-white"> Groups</a></li>
+            <li><a href="../events" class="text-white"> Events</a></li>
             <% if user_signed_in? %>
                 <li><a href="/not_found" class="text-white">Blog</a></li>
                 <li class="dropdown"><a  href='<%= user_url(current_user) %>'><span class="text-white"><%=current_user.user_name=%></span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                   <ul>
-                    <li> <a href='#'></i>My Groups</a></li>
                     <li><a href="<%= destroy_user_session_url %>" ></i>Sign Out</a></li>
                   </ul>
                 </li>
