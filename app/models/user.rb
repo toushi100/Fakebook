@@ -52,7 +52,6 @@ class User < ApplicationRecord
   
   # Validations 
 
-  validates :profile_picture, presence: true, blob: { content_type: :image }
   after_commit :add_default_avatar
   validates_presence_of :user_name
   validates :user_name, length: { minimum: 2 , message: "cannot be less than 3 characters" }

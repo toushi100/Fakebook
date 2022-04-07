@@ -70,5 +70,6 @@ Rails.application.routes.draw do
 
   get 'notifications/:user_id', to: 'notifications#index', as:'show_notifications'
 
-  root to: "home#index"
+  root to: "home#index", as: "home"
+
 end
