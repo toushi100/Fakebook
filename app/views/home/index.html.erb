@@ -1,30 +1,12 @@
 <%if user_signed_in?%>
-    <%notifications = Notification.where(user_id: current_user.id, Viewed: false)%>
-    <% if notifications.count > 0 %>
-        <strong>
-        <%= link_to 'New Notifications: ', show_notifications_url(user_id: current_user.id),method: :get  %>
-        <%= notifications.count %> 
-    </strong>
-    <%end%>
-    <h1>Hello, <%= current_user.user_name %></h1>
+    <% controller.redirect_to posts_path%>
 <%else%>
     <h1>Hello, Please Sign In</h1>
+    <a href='http://localhost:3000/users/sign_up' class="btn btn-primary ml-3"></i>Sign Up</a>
+    <br>
+    <a href='http://localhost:3000/users/sign_in' class="btn btn-primary ml-3"></i>Sign In</a>
+    <br>
 <%end%>
 
-
-
-<% if user_signed_in?%>
-<a href='http://localhost:3000/users/sign_out' class="btn btn-danger ml-3"></i>Sign Out</a>
-<br>
-<%else%>
-<a href='http://localhost:3000/users/sign_up' class="btn btn-primary ml-3"></i>Sign Up</a>
-<br>
-<a href='http://localhost:3000/users/sign_in' class="btn btn-primary ml-3"></i>Sign In</a>
-<%end%>
-
-<%if user_signed_in?%>
-<a href='http://localhost:3000/users/<%= current_user.id%>'></i>My Profile</a><br><br>
-<a href='http://localhost:3000/users'></i>Find Friends</a>
-<%end%>
 
 <br>
