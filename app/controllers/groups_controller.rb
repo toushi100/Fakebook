@@ -8,6 +8,9 @@ class GroupsController < ApplicationController
     @newGroup.created_by_id = current_user.id
     @newGroup.save
     current_user.groups << @newGroup
+    message = "#{current_user.user_name} added created group #{@newGroup.name}"
+    scope = current_user.friends
+    SendNotificationsJob.perform_now({:message => message, :scope => scope})
   end
 
   def join_group
