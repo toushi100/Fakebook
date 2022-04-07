@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   devise_scope :user do
     get "/users/sign_out" => "devise/sessions#destroy"
   end
+
+  resources :users, :only =>[:show]
+  get 'users/:id', to: 'users#show', as: 'show_user'
  
   # Friends routes
 
@@ -16,7 +19,7 @@ Rails.application.routes.draw do
   post 'users/block_friend/:id', to: 'users#block_friend', as: 'block_friend'
   delete 'users/un_block_friend/:id', to: 'users#un_block_friend', as: 'un_block_friend'
   post 'users/accept_friend_request/:id', to: 'users#accept_friend_request', as: 'accept_friend_request'
-  resources :users, :only =>[:show]
+  
 
   # Events routes
 
