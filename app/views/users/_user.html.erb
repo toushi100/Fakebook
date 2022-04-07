@@ -99,7 +99,13 @@
             </div>
             <div class="col">
                   <h1>Posts</h1>
-                  
+                  <% @posts=Post.where(user_id: current_user.id) %>
+                  <% @posts.each do |post| %>
+                        <%= render 'posts/post', post: post %>
+                        <p>
+                        <%= link_to "Show this post", post %>
+                        </p>
+                  <% end %>
             </div>
       </div>
 </div>
