@@ -2,12 +2,28 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @users = User.all
+    @users=[]
+    users = User.all
+    users.each{
+      |user|
+      unless user == current_user
+        unless user.friends.where(id: current_user.id).count > 0 or current_user.friends.where(id: user.id).count > 0
+          unless user.blocked_friend.where(id: current_user.id).count > 0 or current_user.blocked_friend.where(id: user.id).count > 0
+            @users.append(user)
+          end
+        end
+      end
+    }
   end
 
   def show
     @user = User.find_by_id(params[:id])
-    @groups = Group.all
+    if @user == nil
+      render "layouts/404"
+    end 
+    @groups = Group.where(created_by_id: @user.id)
+    user_groups = UserGroup.where(user_id: @user.id)
+    user_groups.each{|group| @groups.append(Group.where(id: group.group_id))}
   end
 
   def send_friend_request
