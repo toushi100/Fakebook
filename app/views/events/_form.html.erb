@@ -18,7 +18,7 @@
 
   <div>
     <%= form.label :date, style: "display: block" %>
-    <%= form.datetime_field :date %>
+    <%= form.datetime_field :date, step: 'any' %>
   </div>
 
   <div>
@@ -33,7 +33,7 @@
 
   <div>
     <%= form.label :privacy, style: "display: block" %>
-    <%= form.select :privacy, ["public", "friends", "friends_except", "only_me"] %>
+    <%= form.select :privacy, ["public", "friends", "only_me"] %>
   </div>
 
   <div>
