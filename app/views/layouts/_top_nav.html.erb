@@ -1,0 +1,14 @@
+<%= link_to 'Notifications', show_notifications_url(user_id: current_user.id),method: :get  %><br>
+<%notifications = Notification.where(user_id: current_user.id, Viewed: false)%>
+<% if notifications.count > 0 %>
+    <strong>
+    <%= link_to 'New Notifications: ', show_notifications_url(user_id: current_user.id),method: :get  %>
+    <%= notifications.count %> 
+    </strong>
+<%end%>
+<a href='http://localhost:3000/users'></i>Find Friends</a><br>
+<a href='http://localhost:3000/users/<%= current_user.id%>'></i>My Profile</a><br>
+<%= link_to 'Groups' , groups_path%><br>
+<%= link_to 'Events' , events_path%><br>
+<%= link_to 'Timeline' , posts_path%><br>
+<a href='http://localhost:3000/users/sign_out' class="btn btn-danger ml-3"></i>Sign Out</a><br>
