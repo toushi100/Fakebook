@@ -36,11 +36,8 @@
 
     <%if user_signed_in?%>
      <%= render "layouts/top_nav" %>
-    <%end%>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-    <%= yield %>
-  </body>
+    <%end%> 
+  
     <!-- ======= Header ======= -->
     <header id="header" class="header d-flex align-items-center fixed-top" style="background-color:#4267B2;">
       <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
@@ -49,17 +46,33 @@
           <!-- <img src="assets/img/logo.png" alt=""> -->
           <h1 class="text-white"style="font-family: 'Titillium Web', sans-serif;">Fakebook</h1>
         </a>
+
+        <!-- ======= Navbar ======= -->
+        <%if user_signed_in?%>
         <nav id="navbar" class="navbar">
           <ul class="text-white">
-            <li><a href="index.html" class="text-white">My Posts</a></li>
-            <li class="dropdown"><a href="category.html"><span class="text-white">Notifications</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <li><a href="../posts" class="text-white"> Posts</a></li>
+            <%notifications = Notification.where(user_id: current_user.id, viewed: false)%>
+            
+            <li class="dropdown"><a href="../notifications/<%=current_user.id%>"><span class="text-white">
+             Notifications
+            <% if notifications.count > 0 %>
+            <%= notifications.count %> 
+            <%end%>
+            </span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <% @notifications = Notification.where(user_id: current_user.id).limit(10)%>
               <ul>
+              <%if @notifications.count == 0%><li>
+                <a href="#">No notifications</a></li>
+              <%end%>
+                <%@notifications.each do |notification|%>
+                  <li><a href="#"><%=notification.Message%></a></li>
+                <%end%>
                 
-                <li><a href="#">Drop Down 1</a></li>
               </ul>
             </li>
             <% if user_signed_in? %>
-                <li><a href="index.html" class="text-white">Blog</a></li>
+                <li><a href="/not_found" class="text-white">Blog</a></li>
                 <li class="dropdown"><a  href='<%= user_url(current_user) %>'><span class="text-white"><%=current_user.user_name=%></span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                   <ul>
                     <li> <a href='#'></i>My Groups</a></li>
@@ -70,9 +83,12 @@
                 <a href='<%= new_user_registration_url%>' class ="btn btn-default text-white"></i>Sign Up</a>
                 <a href="<%= new_user_session_url %>" class ="btn btn-default text-white" ></i>Sign In</a>
             <% end %>
-        </ul>
+       
+            </ul>
 
-</nav><!-- .navbar -->
+</nav>
+<!-- .navbar -->
+<%end%>
 </div>
 </header>
 <!-- End Header -->

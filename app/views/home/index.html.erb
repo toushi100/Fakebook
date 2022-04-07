@@ -1,12 +1,6 @@
 
 <%if user_signed_in?%>
     <% controller.redirect_to posts_path%>
-<%else%>
-    <h1>Hello, Please Sign In</h1>
-    <a href='http://localhost:3000/users/sign_up' class="btn btn-primary ml-3"></i>Sign Up</a>
-    <br>
-    <a href='http://localhost:3000/users/sign_in' class="btn btn-primary ml-3"></i>Sign In</a>
-    <br>
 <%end%>
 
 

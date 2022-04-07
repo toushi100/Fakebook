@@ -19,7 +19,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by_id(params[:id])
     if @user == nil
-      render "layouts/404"
+      redirect_to not_found_path
+      return
     end 
     @groups = Group.where(created_by_id: @user.id)
     user_groups = UserGroup.where(user_id: @user.id)
