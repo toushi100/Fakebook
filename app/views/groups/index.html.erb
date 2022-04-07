@@ -1,0 +1,62 @@
+<h1> Groups</h1>
+
+<%@groups.each do |group|%>
+    <div class="card">
+        <p>
+            <strong style="color : Red" class="card-title" >Name :</strong>
+            <%= group.name %>
+        </p>
+
+        <% group.users.each do |members|%>
+            <h6> Member id : <%= members.id%> , Member Name : <%= members.user_name%></h6>
+            <h5>  </h5>
+        <%end%>
+    </div>
+
+<%end%>
+
+<%= form_tag("/groups/index", method: "post") do %>
+    <%= label_tag :name %><br>
+    <%= text_field_tag :name %>
+    <br>
+    
+    <p>
+    <%= submit_tag("Add new group") %>
+    </p>
+<% end %>
+
+                  <h1>Groups</h1>
+                  <table>
+                        <thead>
+                              <tr>
+                              <th> ID </th>
+                              <th> Name </th>
+                              <th> join?</th>
+                              <th>Delete</th>
+                              </tr>
+                        </thead>
+                        <tbody>
+                              <% @groups.each do |group| %>
+                              <tr>
+                                    <%flagGroup = true%>
+                                    <td> <%= group.id%></td>
+                                    <td> <%= group.name%></td>
+                                    <% current_user.group_ids.each do |check|%>
+                                          <%if check == group.id%>
+                                                <%flagGroup = false%>
+                                          <%end%>
+                                    <%end%>
+                                    <%if flagGroup%>
+                                          <td><%= button_to 'Join' ,join_group_path(group.id) %>   </td>
+                                    <%else%>
+                                          <td><h6> Joined</h4>
+                                    <%end%>
+                                    <%if current_user.id == group.created_by_id%>
+                                          <td> <%= button_to ' Delete' , delete_path(group.id) , method: :delete%>
+                                    <%else%>
+                                          <td><h6> You cant delete this group </h6></td>
+                                    <%end%>
+                              </tr>
+                              <%end%>
+                  </tbody>
+                  </table>
