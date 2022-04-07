@@ -22,7 +22,7 @@
                               <tr>
                                     <% if friend.status == true %>
                                           <% temp = User.find(friend.friend_id)%>
-                                          <td> <%= temp.user_name%><%= link_to 'Show Profile' ,show_user_path(id: temp.id)%> </td>
+                                          <td> <%= link_to "#{temp.user_name}" ,show_user_path(id: temp.id)%> </td>
                                           <td> <%= button_to 'Remove Friend', remove_friend_path(current_user.id), method: :delete %> </td>
                                           <td> <%= button_to 'Block Friend', block_friend_path(friend.friend_id)%> </td>
                                     <%end%>
