@@ -70,6 +70,9 @@ Rails.application.routes.draw do
 
   get 'notifications/:user_id', to: 'notifications#index', as:'show_notifications'
 
+  # Not found
+  get 'not_found', to: 'pages#not_found', as:'not_found'
+
   root to: "home#index", as: "home"
 
 end
