@@ -75,4 +75,6 @@ Rails.application.routes.draw do
 
   root to: "home#index", as: "home"
 
+  get "*path", to: redirect('not_found')
+
 end
