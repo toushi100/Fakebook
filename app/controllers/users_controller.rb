@@ -22,9 +22,7 @@ class UsersController < ApplicationController
       redirect_to not_found_path
       return
     end 
-    @groups = Group.where(created_by_id: @user.id)
-    user_groups = UserGroup.where(user_id: @user.id)
-    user_groups.each{|group| @groups.append(Group.where(id: group.group_id))}
+    @groups = @user.user_groups
   end
 
   def send_friend_request
