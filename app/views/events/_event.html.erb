@@ -1,58 +1,53 @@
 <div id="<%= dom_id event %>">
-  <p>
-    <strong>Name:</strong>
-    <%= event.name %>
-  </p>
 
-  <p>
-    <strong>Date and Time:</strong>
-    <%= event.date.to_s(:long) %>
-  </p>
+  <div class="card mt-2 p-0">
+      <div class="card-header bg-white border-bottom-0">
+        <div class="row">
+          <strong><%= event.name %> - <%= event.date.to_s(:long) %></strong><br>
+          <div class="card-body">
+            <p>  
+              <%= event.description %>
+            </p>
+            <p>
+            <% if event.online_InPerson %>
+              Online
+            <% else %>
+              In Person
+            <% end %>
+            </p>
+            <p>
+              <%= event.location %>
+            </p>
 
-  <p>
-    <strong>Description:</strong>
-    <%= event.description %>
-  </p>
-
-  <p>
-    <% if event.online_InPerson %>
-      <strong>Online</strong>
-    <% else %>
-      <strong> In Person</strong>
-    <% end %>
-  </p>
-
-  <p>
-    <strong>Privacy:</strong>
-    <%= event.privacy %>
-  </p>
-  
-
-  <p>
-    <strong>Location:</strong>
-    <%= event.location %>
-  </p>
-
-  <p>
-    <strong>Going</strong>
-    <%= event.going.count%>
-    <% @going.each do |friend| %>
-      <div>
-        <%= friend.user_name %>
-    </div>
-    <%end%>
-  </p>
-
-  <p>
-    <strong>Interested</strong>
-    <%= event.interested.count%>
-    <% @interested.each do |friend| %>
-      <div>
-        <%= friend.user_name %>
+            <p>
+              <strong>Going</strong>
+              <%= event.going.count%>
+              <% @going.each do |friend| %>
+                <div>
+                  <%= friend.user_name %>
+              </div>
+              <%end%>
+            </p>
+            <p>
+              <strong>Interested</strong>
+              <%= event.interested.count%>
+              <% @interested.each do |friend| %>
+                <div>
+                  <%= friend.user_name %>
+                </div>
+              <%end%>
+            </p>
+            <P>
+            <%if current_user.id == event.user_id%>
+            <strong>Privacy:</strong>
+            <%=event.privacy%>
+            <%end%>
+            </p>
+          </div>
+        </div>
       </div>
-    <%end%>
-  </p>
-
+  </div>
+  
   <% unless @event == nil %>
     <% status = nil %>
     <% if @event.going.include?(current_user)%>

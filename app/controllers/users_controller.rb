@@ -25,6 +25,14 @@ class UsersController < ApplicationController
     @groups = @user.user_groups
   end
 
+  def friends
+    @user = User.find_by_id(params[:profile_id])
+  end
+
+  def groups
+    @user = User.find_by_id(params[:profile_id])
+  end
+
   def send_friend_request
     if user_signed_in?
       @newfriend = Friendlist.new

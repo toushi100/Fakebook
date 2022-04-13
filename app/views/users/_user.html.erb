@@ -16,112 +16,21 @@
                   <% end %>
                   
                   
-                  <h1>Name : <%= user.user_name %></h1>
+                  <h1><%= user.user_name %></h1>
 
                   <% if iscurrent or privacy.phone_number=="public" or (privacy.phone_number=="friends" and isfriend) %>
                         <h5>Phone Number : <%= user.phone_number%></h5>
                   <% end %>
 
-                  <% if iscurrent or privacy.phone_number=="public" or (privacy.phone_number=="friends" and isfriend) %>
+                  <% if iscurrent or privacy.email=="public" or (privacy.email=="friends" and isfriend) %>
                         <h5>Email : <%= user.email%></h5>
                   <% end %>
                   
                   <br>
                   <br>
                   
-                  
             </div>
 
-
-            <div class="col">
-
-            <% if iscurrent or privacy.phone_number=="public" or (privacy.phone_number=="friends" and isfriend) %>
-                  <h1>Friends</h1>
-                  <table>
-                        <% user.friendlists.each do |friend| %>
-                        <tbody>
-                              <tr>
-                                    <% if friend.status == true %>
-                                          <% temp = User.find(friend.friend_id)%>
-                                          <td> <%= link_to "#{temp.user_name}" ,show_user_path(id: temp.id)%> </td>
-                                          <td> <%= button_to 'Remove Friend', remove_friend_path(current_user.id), method: :delete %> </td>
-                                          <td> <%= button_to 'Block Friend', block_friend_path(friend.friend_id)%> </td>
-                                    <%end%>
-                              </tr>
-                        </tbody>
-                        <%end%>
-                  </table>
-            <%end%>
-
-            <%if user == current_user%>
-                  <h1>Pending Requests</h1>
-                  <table>
-                        <% user.friendlists.each do |friend| %>
-                        <tbody>
-                              <tr>
-                                    <% if friend.status == false %>
-                                          <% temp = User.find(friend.friend_id)%>
-                                          <td> <%= temp.user_name%> </td>
-                                    <%end%>
-                              </tr>
-                        </tbody>
-                        <%end%>
-                  </table>
-
-                  
-                  <h1>Received Requests</h1>
-                  <table>
-                        
-                        <tbody>
-                              
-                              <%temp = user.requests_received%>
-                              <% temp.map { |user| %>
-                              <tr>
-                                    <td>  <%= user.user_name %>   </td>
-                                    <td> <%= button_to 'Accept Friend Request', accept_friend_request_path(current_user.id) %> </td>
-                                    <td> <%= button_to 'Remove Friend Request', remove_friend_request_path(current_user.id), method: :delete %> </td>
-                              </tr>
-                              <% }.join("\n ") %>
-                        </tbody>
-                  </table>
-            
-                  <h3>Blocked</h3>
-                  <table>
-                        <% user.block_lists.each do |friend| %>
-                        <tbody>
-                              <tr>
-                                    <%if friend.blocked_status == false%>
-                                          <% temp = User.find(friend.blocked_friend_id)%>
-                                          <td> <%= temp.user_name%> </td>
-                                          <td> <%= button_to 'Un Block', un_block_friend_path(friend.blocked_friend_id), method: :delete %> </td>
-                                    <%end%>
-                              </tr>
-                        </tbody>
-                        <%end%>
-                  </table>
-                  <br>
-            <%end%>
-            </div>
-            <div class="col">
-            <% if iscurrent or privacy.phone_number=="public" or (privacy.phone_number=="friends" and isfriend) %>
-                  <h1>Joined Groups</h1>
-                  <table>
-                        <tbody>
-                        <% current_user.groups.each do |currentGroup|%>
-                              <tr>
-                                    <td> <%= currentGroup.id%></td> 
-                                    <td> <%= currentGroup.name%></td>
-                                    <td> <%= button_to 'Leave', remove_user_from_group_path(currentGroup.id), method: :delete%>
-                              
-                              </tr>
-                        <%end%> 
-                        </tbody>
-                  </table>
-                  <br>
-                  <br>
-            <%end%> 
-                  
-            </div>
             <div class="col">
                   <h1>Posts</h1>
                   <% @posts=Post.where(user_id: current_user.id) %>
@@ -132,5 +41,15 @@
                         </p>
                   <% end %>
             </div>
+
+            <div class="col">
+            <% if iscurrent or privacy.friends=="public" or (privacy.friends=="friends" and isfriend) %>
+                  <h3><%= button_to 'Friends', friends_path(user) %></h3>
+            <%end%>
+            <% if iscurrent or privacy.groups=="public" or (privacy.groups=="friends" and isfriend) %>
+                  <h3><%= button_to 'Groups', user_groups_path(user) %></h3>
+            <%end%>
+            </div>
+            
       </div>
 </div>
