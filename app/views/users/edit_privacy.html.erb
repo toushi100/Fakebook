@@ -1,0 +1,30 @@
+<%= form_with model: @privacy do |form| %>
+  <div>
+    <%= form.label :email, style: "display: block" %>
+    <%= form.select :email, ["public", "friends", "only_me"] %>
+  </div>
+
+  <div>
+    <%= form.label :phone_number, style: "display: block" %>
+    <%= form.select :phone_number, ["public", "friends", "only_me"] %>
+  </div>
+
+  <div>
+    <%= form.label :profile_photo, style: "display: block" %>
+    <%= form.select :profile_photo, ["public", "friends", "only_me"] %>
+  </div>
+
+  <div>
+    <%= form.label :friends, style: "display: block" %>
+    <%= form.select :friends, ["public", "friends", "only_me"] %>
+  </div>
+
+  <div>
+    <%= form.label :groups, style: "display: block" %>
+    <%= form.select :groups, ["public", "friends", "only_me"] %>
+  </div> <br>
+  
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

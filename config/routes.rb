@@ -19,9 +19,14 @@ Rails.application.routes.draw do
   post 'users/block_friend/:id', to: 'users#block_friend', as: 'block_friend'
   delete 'users/un_block_friend/:id', to: 'users#un_block_friend', as: 'un_block_friend'
   post 'users/accept_friend_request/:id', to: 'users#accept_friend_request', as: 'accept_friend_request'
-  post '/friends/:profile_id', to: 'users#friends', as: 'friends'
-  post '/groups/:profile_id', to: 'users#groups', as: 'user_groups'
-  
+
+  # Profile
+  scope 'users' do
+    post '/friends/:profile_id', to: 'users#friends', as: 'friends'
+    post '/groups/:profile_id', to: 'users#groups', as: 'user_groups'
+    get 'privacy/:id', to: 'users#edit_privacy', as: 'edit_privacy'
+    patch 'privacy/:id', to: 'users#update_privacy', as: 'profile_privacy'
+  end
 
   # Events routes
 

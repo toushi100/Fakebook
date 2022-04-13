@@ -3,7 +3,6 @@
             <div class="col-md">
                   <%= image_tag user.profile_picture , size: "200x200" %>
 
-                  <%privacy = ProfilePrivacy.where(user_id:user.id).first%>
                   <% iscurrent = false %>
                   <% if current_user == user %>
                         <% iscurrent = true %>
@@ -18,11 +17,11 @@
                   
                   <h1><%= user.user_name %></h1>
 
-                  <% if iscurrent or privacy.phone_number=="public" or (privacy.phone_number=="friends" and isfriend) %>
+                  <% if iscurrent or @privacy.phone_number=="public" or (@privacy.phone_number=="friends" and isfriend) %>
                         <h5>Phone Number : <%= user.phone_number%></h5>
                   <% end %>
 
-                  <% if iscurrent or privacy.email=="public" or (privacy.email=="friends" and isfriend) %>
+                  <% if iscurrent or @privacy.email=="public" or (@privacy.email=="friends" and isfriend) %>
                         <h5>Email : <%= user.email%></h5>
                   <% end %>
                   
@@ -47,10 +46,10 @@
             </div>
 
             <div class="col">
-            <% if iscurrent or privacy.friends=="public" or (privacy.friends=="friends" and isfriend) %>
+            <% if iscurrent or @privacy.friends=="public" or (@privacy.friends=="friends" and isfriend) %>
                   <h3><%= button_to 'Friends', friends_path(user) %></h3>
             <%end%>
-            <% if iscurrent or privacy.groups=="public" or (privacy.groups=="friends" and isfriend) %>
+            <% if iscurrent or @privacy.groups=="public" or (@privacy.groups=="friends" and isfriend) %>
                   <h3><%= button_to 'Groups', user_groups_path(user) %></h3>
             <%end%>
             </div>
