@@ -53,10 +53,10 @@
             <li class="dropdown"><a href="../notifications/<%=current_user.id%>"><span class="text-white">
              Notifications
             <% if notifications.count > 0 %>
-            <%= notifications.count %> 
+            <strong style="background-color:red"><%= notifications.count %> </strong>
             <%end%>
             </span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-            <% @notifications = Notification.where(user_id: current_user.id).limit(10)%>
+            <% @notifications = Notification.where(user_id: current_user.id).limit(notifications.count)%>
               <ul>
               <%if @notifications.count == 0%><li>
                 <a href="#">No notifications</a></li>
