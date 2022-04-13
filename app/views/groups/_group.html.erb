@@ -20,12 +20,13 @@
                         <p>
                         <strong>Members</strong><br>      
                         <% group.users.each do |member|%>
-                              <%= member.user_name%><br>
+                              <%= image_tag member.profile_picture,class:"rounded-circle",style:"max-width:4%"%>
+                              <strong><a href="<%= user_url(member)%>"><%=member.user_name%></a></strong><br>
                         <%end%>
                         </p>
                         <p>
                         <%if current_user.id == group.created_by_id%>
-                              <%= button_to ' Delete' , delete_path(group.id) , method: :delete%>
+                              <%= button_to 'Delete' , delete_path(group.id) , method: :delete%>
                         <%end%>
                         </p>
                   </div>
