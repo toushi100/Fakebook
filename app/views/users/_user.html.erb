@@ -35,7 +35,7 @@
                   <h1>Posts</h1>
                   <div class="card mt-2 p-0">
                   <div class="card-header bg-white border-bottom-0">
-                  <% @posts=Post.where(user_id: current_user.id) %>
+                  <% @posts=Post.where(user_id: user.id) %>
                   <% @posts.each do |post| %>
                         <%= render 'posts/post', post: post %>
                         <p>
