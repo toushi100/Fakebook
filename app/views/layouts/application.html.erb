@@ -81,6 +81,14 @@
                 <a href='<%= new_user_registration_url%>' class ="btn btn-default text-white"></i>Sign Up</a>
                 <a href="<%= new_user_session_url %>" class ="btn btn-default text-white" ></i>Sign In</a>
             <% end %>
+            <% locale = I18n.locale%>
+            <% if locale == :en%>
+              <% locale = :ar%>
+            <% else%>
+              <% locale = :en%>
+            <% end%>
+            <% current_uri = request.env['PATH_INFO']%>
+            <li><%= link_to t("lang"), switch_url(locale: locale, path: current_uri), class:"btn btn-default text-white"%></li>
        
             </ul>
 

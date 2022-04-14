@@ -75,7 +75,11 @@ Rails.application.routes.draw do
 
   root to: "home#index", as: "home"
 
+  # locale
+  get '*path?locale=:locale', to: 'application#switch_locale', as: 'switch'
+
   # will cause storage photos not to render
   #get "*path", to: redirect('not_found')
+  
 
 end
