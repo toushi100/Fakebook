@@ -1,7 +1,10 @@
 <% if @user == current_user%>
-<h1>  Your Profile </h1>
-<a href='http://localhost:3000/users/edit' class="btn btn-primary ml-3"></i>Edit Profile</a>
-<br>
-<%end%>
 
+<a href='http://localhost:3000/users/edit' class="btn btn-primary ml-3"></i>Edit Profile</a>
+<a href="http://localhost:3000/users/privacy/<%=current_user.id%>" class="btn btn-primary ml-3"></i>Edit Privacy</a>
+<br>
+<h1>  Your Profile </h1>
+<%end%>
 <%= render @user %>
+
+
