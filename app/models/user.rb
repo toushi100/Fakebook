@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  after_save :profile_privacy
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_one_attached :profile_picture
@@ -12,6 +14,21 @@ class User < ApplicationRecord
   # Blocklist Association
   has_many :block_lists
   has_many :blocked_friend, through: :block_lists
+
+  
+  has_and_belongs_to_many :invited_to_events, class_name: 'Event'
+
+  has_many :events, dependent: :destroy
+
+  has_many :event_interests, dependent: :destroy
+  has_many :interested_to_events, through: :event_interests, source: :event
+
+  has_many :event_going_users, dependent: :destroy
+  has_many :going_to_events, through: :event_going_users, source: :event
+  # Validations 
+
+
+  validates :profile_picture, blob: { content_type: :image }
   #user group
   has_many :user_groups
   has_many :groups, through: :user_groups
@@ -23,6 +40,15 @@ class User < ApplicationRecord
   has_many :hearts
   has_many :sads
   has_many :wows
+  after_commit :add_default_avatar, on: %i[create update]
+
+  # Notification
+  has_many :notifications, dependent: :destroy
+
+  # Profile Privacy
+  has_one :privacy, dependent: :destroy, class_name: 'ProfilePrivacy'
+
+  #validates :profile_privacy, presence: true
   
   # Validations 
 
@@ -51,4 +77,11 @@ class User < ApplicationRecord
       )
     end
   end
+
+  def profile_privacy
+    
+    user = User.last
+    user.privacy = ProfilePrivacy.create
+  end
+  
 end

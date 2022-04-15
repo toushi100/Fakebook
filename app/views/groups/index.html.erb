@@ -1,0 +1,15 @@
+<h1> Groups</h1>
+
+<%@groups.each do |group|%>
+      <%= render group %>
+<%end%>
+
+<%= form_tag("/groups/index", method: "post") do %>
+    <%= label_tag :name %><br>
+    <%= text_field_tag :name %>
+    <br>
+    
+    <p>
+    <%= submit_tag("Add new group") %>
+    </p>
+<% end %>

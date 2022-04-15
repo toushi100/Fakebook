@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_02_185728) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_05_152109) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -58,6 +58,47 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_02_185728) do
     t.index ["blocked_friend_id"], name: "index_block_lists_on_blocked_friend_id"
     t.index ["user_id"], name: "index_block_lists_on_user_id"
   end
+
+  create_table "event_going_users", force: :cascade do |t|
+    t.integer "event_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_going_users_on_event_id"
+    t.index ["user_id"], name: "index_event_going_users_on_user_id"
+  end
+
+  create_table "event_interests", force: :cascade do |t|
+    t.integer "event_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_interests_on_event_id"
+    t.index ["user_id"], name: "index_event_interests_on_user_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "date", default: "2022-04-05 11:20:54"
+    t.string "description"
+    t.boolean "online_InPerson", null: false
+    t.boolean "post_permission", default: true
+    t.boolean "invite_permission", default: true
+    t.string "location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.string "privacy", default: "friends"
+    t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "events_users", id: false, force: :cascade do |t|
+    t.integer "event_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_events_users_on_event_id"
+    t.index ["user_id"], name: "index_events_users_on_user_id"
 
   create_table "comments", force: :cascade do |t|
     t.text "content"
@@ -107,12 +148,34 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_02_185728) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.string "Message"
+    t.string "Link"
+    t.boolean "Viewed", default: false
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "profile_privacies", force: :cascade do |t|
+    t.string "email", default: "friends"
+    t.string "phone_number", default: "friends"
+    t.string "profile_photo", default: "friends"
+    t.string "friends", default: "friends"
+    t.string "groups", default: "friends"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_profile_privacies_on_user_id"
   end
 
   create_table "sads", force: :cascade do |t|
@@ -164,6 +227,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_02_185728) do
   add_foreign_key "angries", "users"
   add_foreign_key "block_lists", "users"
   add_foreign_key "block_lists", "users", column: "blocked_friend_id"
+  add_foreign_key "events", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "friendlists", "users"

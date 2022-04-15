@@ -1,0 +1,34 @@
+<div class="card-header bg-white border-bottom-0">
+            <div class="row">
+                  <div class="card">
+                        <p>
+                              <strong><%= group.name %></strong>
+                        </p>
+                        <p>
+                        <%flagGroup = true%>
+                        <% current_user.group_ids.each do |check|%>
+                              <%if check == group.id%>
+                                    <%flagGroup = false%>
+                              <%end%>
+                        <%end%>
+                        <%if flagGroup%>
+                              <%= button_to 'Join' ,join_group_path(group.id) %>
+                        <%else%>
+                              Joined
+                        <%end%>
+                        </p>
+                        <p>
+                        <strong>Members</strong><br>      
+                        <% group.users.each do |member|%>
+                              <%= image_tag member.profile_picture,class:"rounded-circle",style:"max-width:4%"%>
+                              <strong><a href="<%= user_url(member)%>"><%=member.user_name%></a></strong><br>
+                        <%end%>
+                        </p>
+                        <p>
+                        <%if current_user.id == group.created_by_id%>
+                              <%= button_to 'Delete' , delete_path(group.id) , method: :delete%>
+                        <%end%>
+                        </p>
+                  </div>
+            </div>
+      </div>

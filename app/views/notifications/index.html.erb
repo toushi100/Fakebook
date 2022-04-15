@@ -1,0 +1,11 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Notifications</h1>
+
+<div id="notifications">
+  
+  <% @notifications.each do |notification| %>
+    <%= render notification %>
+  <% end %>
+</div>
+

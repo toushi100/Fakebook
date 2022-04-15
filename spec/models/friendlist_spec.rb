@@ -2,12 +2,11 @@ require "rails_helper"
 
 RSpec.describe Friendlist, type: :model do
   before do
-    @file = fixture_file_upload("/home/ahmed/Desktop/i.png", "")
     Ahmed = User.create!(user_name: "Ahmed", email: "Ahmed@gmail.com",
-                         phone_number: 9033453648, profile_picture: @file,
+                         phone_number: 9033453648, 
                          password: "123456", password_confirmation: "123456")
     Ali = User.create!(user_name: "Ali", email: "Ali@gmail.com",
-                       phone_number: 9038456748, profile_picture: @file,
+                       phone_number: 9038456748,
                        password: "123456", password_confirmation: "123456")
   end
   it "should have send friend request" do

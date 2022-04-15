@@ -1,0 +1,76 @@
+<div class="container-xs">
+  <div class="row">
+    <div class="col-4">      
+      <h1>Friends</h1>
+      <table>
+            <% @user.friendlists.each do |friend| %>
+            <tbody>
+                  <tr>
+                        <% if friend.status == true %>
+                              <% temp = User.find(friend.friend_id)%>
+                              <td><%= image_tag temp.profile_picture,class:"rounded-circle",style:"max-width:50px;"%></td>
+                              <td><strong><a href="<%= user_url(temp)%>"><%=temp.user_name%></a></strong></td>
+                              <%if @user == current_user%>
+                              <td> <%= button_to 'Remove Friend', remove_friend_path(current_user.id), method: :delete %> </td>
+                              <td> <%= button_to 'Block Friend', block_friend_path(friend.friend_id)%> </td>
+                              <%end%>
+                        <%end%>
+                  </tr>
+            </tbody>
+            <%end%>
+      </table>
+    </div>
+
+    <%if @user == current_user%>
+    <div class="col">
+      <h2>Pending Requests</h2>
+      <table>
+            <% @user.friendlists.each do |friend| %>
+            <tbody>
+                  <tr>
+                        <% if friend.status == false %>
+                              <% temp = User.find(friend.friend_id)%>
+                              <td> <%= temp.user_name%> </td>
+                        <%end%>
+                  </tr>
+            </tbody>
+            <%end%>
+      </table>
+    </div>
+    <div class="col">
+      <h2>Received Requests</h2>
+      <table>
+            
+            <tbody>
+                  
+                  <%temp = @user.requests_received%>
+                  <% temp.map { |user| %>
+                  <tr>
+                        <td> <%= user.user_name %>   </td>
+                        <td> <%= button_to 'Accept Friend Request', accept_friend_request_path(current_user.id) %> </td>
+                        <td> <%= button_to 'Remove Friend Request', remove_friend_request_path(current_user.id), method: :delete %> </td>
+                  </tr>
+                  <% }.join("\n ") %>
+            </tbody>
+      </table>
+    </div>
+    <div class="col">
+      <h2>Blocked</h2>
+      <table>
+            <% @user.block_lists.each do |friend| %>
+            <tbody>
+                  <tr>
+                        <%if friend.blocked_status == false%>
+                              <% temp = User.find(friend.blocked_friend_id)%>
+                              <td> <%= temp.user_name%> </td>
+                              <td> <%= button_to 'Un Block', un_block_friend_path(friend.blocked_friend_id), method: :delete %> </td>
+                        <%end%>
+                  </tr>
+            </tbody>
+            <%end%>
+      </table>
+      <br>
+    </div>
+    <%end%>
+  </div>
+</div>
