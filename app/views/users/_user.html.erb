@@ -38,7 +38,7 @@
                   <% @posts.each do |post| %>
                         <%= render 'posts/post', post: post %>
                         <p>
-                        <%= link_to "Show this post", post %>
+                        <%= link_to t("Show this post"), post %>
                         </p>
                   <% end %>
                   </div>

@@ -1,0 +1,105 @@
+ar:
+  lang: "العربية"
+  activerecord:
+    models:
+      post: "المنشور"
+      user: "المستخدم"
+      notification: "الإشعار"
+      group: "المجموع"
+      event: "الفعالية"
+      comment: "تعليق"
+    attributes:
+      post:
+        text: "المحتوى"
+      user:
+        user_name: "الاسم"
+        email: "الإيميل"
+        phone_number: "رقم المحمول"
+        password: "كلمة السر"
+        remember_me: "تذكرني"
+        password_confirmation: "تأكيد كلمة السر"
+        Profile_Picture: "الصورة الشخصية"
+      notification:
+        Message: "المحتوى"
+        Link: "الرابط"
+        Viewed: "المشاهدة"
+      group:
+        name: "الاسم"
+      event:
+        name: "الاسم"
+        date: "التاريخ"
+        description: "الوصف"
+        online_InPerson: "نوع الحدث"
+        location: "المكان"
+      comment:
+        content: "المحتوى"
+
+  Timeline: "الرئيسية"
+  Notifications: "الإشعارات"
+  Find Friends: "البحث عن أصدقاء"
+  Groups: "المجموعات"
+  Events: "الفعاليات"
+  Blog: "المدونة"
+  Sign Out: "الخروج"
+  Posts: "المنشورات"
+  Comments: "التعليقات"
+  Your Profile: "صفحتك الشخصية"
+  Show this post: "فتح المنشور"
+  Edit this post: "تعديل المنشور"
+  Back to posts: "عودة"
+  Destroy this post: "حذف المنشور"
+  Editing event: "فتح الحدث"
+  Show this event: "تعديل الحدث"
+  Back to events: "عودة"
+  Destroy this event: "حذف الحدث"
+  New event: "حدث جديد"
+  Add new group: "إضافة مجموعة جديدة"
+  New post: "منشور جديد"
+  Reacts: "تفاعل"
+  Show Profile: "الملف الشخصي"
+  Find New Friends: "ابحث عن أصدقاء جدد"
+  Name: "الاسم"
+  Send Friend Request: "ارسل طلب صداقة"
+  No new notifications: "لا إشعارات جديدة"
+
+  notifications:
+    notification:
+      Message: "الرسالة"
+      Time: "الوقت"
+
+  users:
+    registrations:
+      new:
+        Sign up: "حساب جديد"
+        characters minimum: "رموز أقل عدد"
+    shared:
+      links:
+        Log in: "تسجيل دخول"
+        Sign up: "حساب جديد"
+        Forgot your password?: "نسيت كلمة المرور؟"
+    sessions:
+      new:
+        Log in: "تسجيل دخول"
+    passwords:
+      new:
+        Forgot your password?: "نسيت كلمة المرور؟"
+        Send me reset password instructions: "ارسل تعليمات إعادة تسجيل كلمة المرور"
+    
+  devise:
+    registrations:
+      new:
+        Sign up: "حساب جديد"
+        characters minimum: "رموز أقل عدد"
+    shared:
+      links:
+        Log in: "تسجيل دخول"
+        Sign up: "حساب جديد"
+        Forgot your password?: "نسيت كلمة المرور؟"
+    sessions:
+      new:
+        Log in: "تسجيل دخول"
+    passwords:
+      new:
+        Forgot your password?: "نسيت كلمة المرور؟"
+        Send me reset password instructions: "ارسل تعليمات إعادة تسجيل كلمة المرور"
+

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_05_152109) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_06_113635) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -59,6 +59,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_05_152109) do
     t.index ["user_id"], name: "index_block_lists_on_user_id"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.integer "post_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "event_going_users", force: :cascade do |t|
     t.integer "event_id"
     t.integer "user_id"
@@ -79,7 +89,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_05_152109) do
 
   create_table "events", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "date", default: "2022-04-05 11:20:54"
+    t.datetime "date", default: "2022-04-14 00:13:21"
     t.string "description"
     t.boolean "online_InPerson", null: false
     t.boolean "post_permission", default: true
@@ -99,15 +109,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_05_152109) do
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_events_users_on_event_id"
     t.index ["user_id"], name: "index_events_users_on_user_id"
-
-  create_table "comments", force: :cascade do |t|
-    t.text "content"
-    t.integer "post_id", null: false
-    t.integer "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_comments_on_post_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "friendlists", force: :cascade do |t|
@@ -227,9 +228,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_05_152109) do
   add_foreign_key "angries", "users"
   add_foreign_key "block_lists", "users"
   add_foreign_key "block_lists", "users", column: "blocked_friend_id"
-  add_foreign_key "events", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "events", "users"
   add_foreign_key "friendlists", "users"
   add_foreign_key "friendlists", "users", column: "friend_id"
   add_foreign_key "hearts", "posts"
