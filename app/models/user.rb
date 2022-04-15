@@ -28,8 +28,7 @@ class User < ApplicationRecord
   # Validations 
 
 
-  validates :profile_picture, presence: true, blob: { content_type: :image }
-
+  validates :profile_picture, blob: { content_type: :image }
   #user group
   has_many :user_groups
   has_many :groups, through: :user_groups
