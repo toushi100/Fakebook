@@ -6,7 +6,7 @@
 
 
 <%= render @post %>
-<p> <%= react = @post.likes.count + @post.hearts.count + @post.angries.count + @post.sads.count + @post.wows.count %> Reacts </p>
+<p> <%= react = @post.likes.count + @post.hearts.count + @post.angries.count + @post.sads.count + @post.wows.count %> <%= t("Reacts") %> </p>
 <p> <%= @post.likes.count %> Likes <%= @post.hearts.count %> Love <%= @post.angries.count %> Angry <%= @post.sads.count %> Sad <%= @post.wows.count %> Wow </p>
 <%if signed_in?%>
 <% like = current_user.likes.find_by(post: @post) %>
@@ -60,8 +60,8 @@
 
 
 <div>
-  <%= link_to "Edit this post", edit_post_path(@post) %> 
-  <%= link_to "Back to posts", posts_path %>
+  <%= link_to t("Edit this post"), edit_post_path(@post) %> 
+  <%= link_to t("Back to posts"), posts_path %>
 
-  <%= button_to "Destroy this post", @post, method: :delete %>
+  <%= button_to t("Destroy this post"), @post, method: :delete %>
 </div>

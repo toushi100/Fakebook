@@ -1,4 +1,4 @@
-<h1> Groups</h1>
+<h1><%= t"Groups" %> </h1>
 
 <%@groups.each do |group|%>
       <%= render group %>
@@ -10,6 +10,6 @@
     <br>
     
     <p>
-    <%= submit_tag("Add new group") %>
+    <%= submit_tag t("Add new group") %>
     </p>
 <% end %>

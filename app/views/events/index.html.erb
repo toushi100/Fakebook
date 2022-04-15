@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Events</h1>
+<h1><%= t"Events" %></h1>
 
 <div id="events">
   <%@going=[]%>
@@ -8,9 +8,9 @@
   <% @events.each do |event| %>
     <%= render event %>
     <p>
-      <%= link_to "Show this event", event %>
+      <%= link_to t("Show this event"), event %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New event", new_event_path %>
+<%= link_to t("New event"), new_event_path %>

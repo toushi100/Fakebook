@@ -1,33 +1,71 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   "true": "foo"
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
   lang: "En"
+  Timeline: "Timeline"
+  Notifications: "Notifications"
+  Find Friends: "Find Friends"
+  Groups: "Groups"
+  Events: "Events"
+  Blog: "Blog"
+  Sign Out: "Sign Out"
+  Posts: "Posts"
+  Comments: "Comments"
+  Your Profile: "Your Profile"
+  Show this post: "Show this post"
+  Edit this post: "Edit this post"
+  Back to posts: "Back to posts"
+  Destroy this post: "Destroy this post"
+  Editing event: "Editing event"
+  Show this event: "Show this event"
+  Back to events: "Back to events"
+  Destroy this event: "Destroy this event"
+  New event: "New event"
+  Add new group: "Add new group"
+  New post: "New post"
+  Reacts: "Reacts"
+  Show Profile: "Show Profile"
+  Find New Friends: "Find New Friends"
+  Name: "Name"
+  Send Friend Request: "Send Friend Request"
+  No new notifications: "No new notifications"
+
+  notifications:
+    notification:
+      Message: "Message"
+      Time: "Time"
+
+  users:
+    registrations:
+      new:
+        Sign up: "Sign up"
+        characters minimum: "characters minimum"
+    shared:
+      links:
+        Log in: "Log in"
+        Sign up: "Sign up"
+        Forgot your password?: "Forgot your password?"
+    sessions:
+      new:
+        Log in: "Log in"
+    passwords:
+      new:
+        Forgot your password?: "Forgot your password?"
+        Send me reset password instructions: "Send me reset password instructions"
+
+  devise:
+    registrations:
+      new:
+        Sign up: "Sign up"
+        characters minimum: "characters minimum"
+    shared:
+      links:
+        Log in: "Log in"
+        Sign up: "Sign up"
+        Forgot your password?: "Forgot your password?"
+    sessions:
+      new:
+        Log in: "Log in"
+    passwords:
+      new:
+        Forgot your password?: "Forgot your password?"
+        Send me reset password instructions: "Send me reset password instructions"
+  

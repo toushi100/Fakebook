@@ -1,4 +1,4 @@
-<h1>Find New Friends! :D</h1>
+<h1><%= t("Find New Friends") %>! :D</h1>
 
 <% @users.each do |user| %>
     
@@ -8,13 +8,13 @@
         <div class="card-body">
 
         <p>
-          <strong style="color : Red" class="card-title" >Name :</strong>
+          <strong style="color : Red" class="card-title" ><%= t("Name")%>:</strong>
           <%= user.user_name %>
         </p>
 
         <br>
-          <%= link_to 'Show Profile' ,show_user_path(id: user.id)%>
-          <%= button_to 'Send Friend Request', send_friend_request_path(user.id) %>
+          <%= link_to t('Show Profile') ,show_user_path(id: user.id)%>
+          <%= button_to t('Send Friend Request'), send_friend_request_path(user.id) %>
         <br>
         </div>
 
