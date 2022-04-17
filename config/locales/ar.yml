@@ -61,6 +61,8 @@ ar:
   Name: "الاسم"
   Send Friend Request: "ارسل طلب صداقة"
   No new notifications: "لا إشعارات جديدة"
+  Sign Up: "حساب جديد"
+  Sign In: "تسجيل دخول"
 
   notifications:
     notification:
