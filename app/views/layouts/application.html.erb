@@ -71,18 +71,17 @@
             <li><a href='../users'class="text-white"></i><%= t "Find Friends" %></a></li>
             <li><a href="../groups" class="text-white"><%= t "Groups" %> </a></li>
             <li><a href="../events" class="text-white"><%= t "Events" %> </a></li>
-            <% if user_signed_in? %>
-                <li><a href="/not_found" class="text-white"><%= t "Blog" %></a></li>
-                <li class="dropdown"><a  href='<%= user_url(current_user) %>'><span class="text-white"><%=current_user.user_name=%></span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-                  <ul>
-                    <li><a href="<%= destroy_user_session_url %>" ></i><%= t "Sign Out" %></a></li>
-                  </ul>
-                </li>
+            <li><a href="/not_found" class="text-white"><%= t "Blog" %></a></li>
+            <li class="dropdown"><a  href='<%= user_url(current_user) %>'><span class="text-white"><%=current_user.user_name=%></span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+              <ul>
+                <li><a href="<%= destroy_user_session_url %>" ></i><%= t "Sign Out" %></a></li>
+              </ul>
+            </li>
             <% else %>
-                <a href='<%= new_user_registration_url%>' class ="btn btn-default text-white"></i>Sign Up</a>
-                <a href="<%= new_user_session_url %>" class ="btn btn-default text-white" ></i><%= t "Sign In" %></a>
+            <li><a href='<%= new_user_registration_url%>' class ="btn btn-default text-white"><%= t "Sign Up" %></a></li>
+            <li><a href="<%= new_user_session_url %>" class ="btn btn-default text-white" ><%= t "Sign In" %></a></li>
             <% end %>
-            <%end%>
+            
             <% locale = I18n.locale%>
             <% if locale == :en%>
               <% locale = :ar%>
