@@ -1,0 +1,75 @@
+<div id="<%= dom_id event %>">
+
+  <div class="card mt-2 p-0">
+      <div class="card-header bg-white border-bottom-0">
+        <div class="row">
+          <strong><%= event.name %> - <%= event.date.to_s(:long) %></strong><br>
+          <div class="card-body">
+            <p>  
+              <%= event.description %>
+            </p>
+            <p>
+            <% if event.online_InPerson %>
+              Online
+            <% else %>
+              In Person
+            <% end %>
+            </p>
+            <p>
+              <%= event.location %>
+            </p>
+
+            <p>
+              <strong>Going</strong>
+              <%= event.going.count%>
+              <% @going.each do |friend| %>
+                <div>
+                  <%= friend.user_name %>
+              </div>
+              <%end%>
+            </p>
+            <p>
+              <strong>Interested</strong>
+              <%= event.interested.count%>
+              <% @interested.each do |friend| %>
+                <div>
+                  <%= friend.user_name %>
+                </div>
+              <%end%>
+            </p>
+            <P>
+            <%if current_user.id == event.user_id%>
+            <strong>Privacy:</strong>
+            <%=event.privacy%>
+            <%end%>
+            </p>
+          </div>
+        </div>
+      </div>
+  </div>
+  
+  <% unless @event == nil %>
+    <% status = nil %>
+    <% if @event.going.include?(current_user)%>
+      <% status = "Going" %>
+    <% elsif @event.interested.include?(current_user) %>
+      <% status = "Interested" %>
+    <%end%>
+    <strong><%= status %></strong>
+    <% unless status == "Going" %>
+      <%= button_to "Going", event_going_path(event_id: @event.id), method: :post %>
+    <%end%>
+    <% puts @status %>
+    <% unless status == "Interested" %>
+      <%= button_to "Interested", event_interested_path(event_id: @event.id), method: :post %>
+    <%end%>
+    <% unless status == nil %>
+      <%if current_user.invited_to_events.include?(@event) %>
+        <%= button_to "Not going", event_delete_invitation, method: :delete %>
+      <%else%>
+        <%= button_to "Not going", event_delete_response_path(event_id: @event.id), method: :delete %>
+      <%end%>
+    <%end%>
+  <%end%>
+
+</div>

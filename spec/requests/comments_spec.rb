@@ -1,9 +1,8 @@
 require "rails_helper"
 
 RSpec.describe "Comments", type: :request do
-  context do
-    @file = fixture_file_upload("/home/ahmed/Desktop/default.png",
-                                "image/png")
+  before :each do
+    @file = fixture_file_upload("avatar.png",  "image/png")
     Ahmed = User.new(user_name: "Ahmed", email: "Ahmed@gmail.com",
                      phone_number: 8749387484, password: "123456",
                      password_confirmation: "123456")
@@ -13,17 +12,16 @@ RSpec.describe "Comments", type: :request do
     Ali = User.new(user_name: "Ali", email: "Ali@gmail.com",
                    phone_number: 8749447484, password: "123456",
                    password_confirmation: "123456")
-    Ali.profile_picture = @file
     Ali.save()
     sign_in Ahmed
     @comment = { "content" => "this comment changed to this" }
     @empty_comment = { content: "" }
-    @post_by_ahmed = Post.create!(text: "This post is by Ahmed",
-                                  image: @file, user_id: Ahmed.id)
-    @comment_by_ahmed = Comment.create!(content: "This comment is by Ahmed",
-                                        user_id: Ahmed.id, post_id: @post_by_ahmed.id)
-    @comment_by_ali = Comment.create!(content: "This comment is by Ali",
-                                      user_id: Ali.id, post_id: @post_by_ahmed.id)
+    @post_by_ahmed = Post.new(text: "This post is by Ahmed", user_id: Ahmed.id)
+    @post_by_ahmed.save()
+    @comment_by_ahmed = Comment.new(content: "This comment is by Ahmed", user_id: Ahmed.id, post_id: @post_by_ahmed.id)
+    @comment_by_ahmed.save
+    @comment_by_ali = Comment.new(content: "This comment is by Ali", user_id: Ali.id, post_id: @post_by_ahmed.id)
+    @comment_by_ali.save
   end
 
   describe "POST /posts/:id/comments" do

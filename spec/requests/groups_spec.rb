@@ -1,8 +1,11 @@
 require "rails_helper"
 
 RSpec.describe "Groups", type: :request do
-  context do
-    Ahmed = User.first
+  before :each do
+    Ahmed = User.new(user_name: "Ahmed", email: "Ahmed@gmail.com",
+                     phone_number: 8749387484, password: "123456",
+                     password_confirmation: "123456")
+    Ahmed.save()
     @group = Group.new(name: "name", created_by_id: 1)
     @group.save()
   end

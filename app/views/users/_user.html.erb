@@ -1,0 +1,58 @@
+<div class="container-xs">
+      <div class="row">
+            <div class="col-md">
+                  <%= image_tag user.profile_picture , size: "200x200" %>
+
+                  <% iscurrent = false %>
+                  <% if current_user == user %>
+                        <% iscurrent = true %>
+                  <% end %>
+                  <% isfriend = false %>
+                  <% unless iscurrent %>
+                        <% if current_user.friends.include?(user) %>
+                              <% isfriend = true %>
+                        <% end %>
+                  <% end %>
+                  
+                  
+                  <h1><%= user.user_name %></h1>
+
+                  <% if iscurrent or @privacy.phone_number=="public" or (@privacy.phone_number=="friends" and isfriend) %>
+                        <h5>Phone Number : <%= user.phone_number%></h5>
+                  <% end %>
+
+                  <% if iscurrent or @privacy.email=="public" or (@privacy.email=="friends" and isfriend) %>
+                        <h5>Email : <%= user.email%></h5>
+                  <% end %>
+                  
+                  <br>
+                  <br>
+                  
+            </div>
+
+            <div class="col">
+                  <h1>Posts</h1>
+                  <div class="card mt-2 p-0">
+                  <div class="card-header bg-white border-bottom-0">
+                  <% @posts=Post.where(user_id: user.id) %>
+                  <% @posts.each do |post| %>
+                        <%= render 'posts/post', post: post %>
+                        <p>
+                        <%= link_to t("Show this post"), post %>
+                        </p>
+                  <% end %>
+                  </div>
+                  </div>
+            </div>
+
+            <div class="col">
+            <% if iscurrent or @privacy.friends=="public" or (@privacy.friends=="friends" and isfriend) %>
+                  <h3><%= button_to 'Friends', friends_path(user) %></h3>
+            <%end%>
+            <% if iscurrent or @privacy.groups=="public" or (@privacy.groups=="friends" and isfriend) %>
+                  <h3><%= button_to 'Groups', user_groups_path(user) %></h3>
+            <%end%>
+            </div>
+            
+      </div>
+</div>

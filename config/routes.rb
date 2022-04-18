@@ -6,7 +6,36 @@ Rails.application.routes.draw do
   devise_scope :user do
     get "/users/sign_out" => "devise/sessions#destroy"
   end
+
+  resources :users, :only =>[:show]
+  get 'users/:id', to: 'users#show', as: 'show_user'
  
+  # Friends routes
+
+  match '/users',   to: 'users#index',   via: 'get'
+  post 'users/send_friend_request/:id', to: 'users#send_friend_request', as: 'send_friend_request'
+  delete 'users/remove_friend_request/:id', to: 'users#remove_friend_request', as: 'remove_friend_request'
+  delete 'users/remove_friend/:id', to: 'users#remove_friend', as: 'remove_friend'
+  post 'users/block_friend/:id', to: 'users#block_friend', as: 'block_friend'
+  delete 'users/un_block_friend/:id', to: 'users#un_block_friend', as: 'un_block_friend'
+  post 'users/accept_friend_request/:id', to: 'users#accept_friend_request', as: 'accept_friend_request'
+
+  # Profile
+  scope 'users' do
+    post '/friends/:profile_id', to: 'users#friends', as: 'friends'
+    post '/groups/:profile_id', to: 'users#groups', as: 'user_groups'
+    get 'privacy/:id', to: 'users#edit_privacy', as: 'edit_privacy'
+    patch 'privacy/:id', to: 'users#update_privacy', as: 'profile_privacy'
+  end
+
+  # Events routes
+
+  resources :events do  
+    post 'going', to: 'events#save_going', as: 'going'
+    post 'interested', to: 'events#save_interested', as: 'interested'
+    delete 'delete_invitation', to: 'events#delete_invitation', as: 'delete_invitation'
+    delete 'delete_response', to: 'events#delete_response', as: 'delete_response'
+  end
 
   get "comments/index"
   resources :posts do
@@ -32,15 +61,6 @@ Rails.application.routes.draw do
   # Comment Delete and Update Routes
   delete "posts/:id/comment/:id", to: "comments#destroy_comment", as: "destroy_comment"
   put "posts/:id/comments/:id", to: "comments#update_comment", as: "update_comment"
-  get "users/index"
-  match '/users',   to: 'users#index',   via: 'get'
-  post 'users/send_friend_request/:id', to: 'users#send_friend_request', as: 'send_friend_request'
-  delete 'users/remove_friend_request/:id', to: 'users#remove_friend_request', as: 'remove_friend_request'
-  delete 'users/remove_friend/:id', to: 'users#remove_friend', as: 'remove_friend'
-  post 'users/block_friend/:id', to: 'users#block_friend', as: 'block_friend'
-  delete 'users/un_block_friend/:id', to: 'users#un_block_friend', as: 'un_block_friend'
-  post 'users/accept_friend_request/:id', to: 'users#accept_friend_request', as: 'accept_friend_request'
-  resources :users, :only =>[:show]
 
 
   #                    GROUPS ROUTES
@@ -53,5 +73,20 @@ Rails.application.routes.draw do
   delete 'groups/remove_user_from_group/:id', to: 'groups#remove_user_from_group' , as: 'remove_user_from_group'
   delete 'groups/delete/:id', to: 'groups#delete' , as: 'delete'
 
+  # Notifications
+
+  get 'notifications/:user_id', to: 'notifications#index', as:'show_notifications'
+
+  # Not found
+  get 'not_found', to: 'pages#not_found', as:'not_found'
+
   root to: "home#index", as: "home"
+
+  # locale
+  get '*path?locale=:locale', to: 'application#switch_locale', as: 'switch'
+
+  # will cause storage photos not to render
+  #get "*path", to: redirect('not_found')
+  
+
 end

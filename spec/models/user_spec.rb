@@ -1,14 +1,14 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
-  filename_path = 'app/assets/images/avatar.png'
+  filename_path = 'avatar.png'
   content_type = 'image/png'
   it "should create new user" do
     user = User.new()
     user.user_name = "shrex"
     user.email = "shrex@email.com"
     user.phone_number = 8373892999
-    user.profile_picture = fixture_file_upload("/home/ahmed/Desktop/default.png", "image/png")
+    user.profile_picture = fixture_file_upload(filename_path, "image/png")
     user.password = "password"
     user.password_confirmation = "password"
     user.save()
@@ -21,7 +21,7 @@ RSpec.describe User, type: :model do
     user.user_name = ""
     user.email = "shrex@email.com"
     user.phone_number = 8373999892
-    user.profile_picture = fixture_file_upload("/home/ahmed/Desktop/default.png", "image/png")
+    user.profile_picture = fixture_file_upload(filename_path, "image/png")
     user.password = "password"
     user.password_confirmation = "password"
     user.save()
@@ -34,7 +34,7 @@ RSpec.describe User, type: :model do
     user.user_name = "444444"
     user.email = "shrex@email.com"
     user.phone_number = 8373892888
-    user.profile_picture = fixture_file_upload("/home/ahmed/Desktop/default.png", "image/png")
+    user.profile_picture = fixture_file_upload(filename_path, "image/png")
     user.password = "password"
     user.password_confirmation = "password"
     user.save()
@@ -47,7 +47,7 @@ RSpec.describe User, type: :model do
     user.user_name = "Ali"
     user.email = "shrex@email.com"
     user.phone_number = 8373892888
-    user.profile_picture = fixture_file_upload("/home/ahmed/Desktop/default.png", "image/png")
+    user.profile_picture = fixture_file_upload(filename_path, "image/png")
     user.password = "password"
     user.password_confirmation = "password"
     user.save()
@@ -60,7 +60,7 @@ RSpec.describe User, type: :model do
     user.user_name = "Ali6666s"
     user.email = "shrex@email.com"
     user.phone_number = 8355573892
-    user.profile_picture = fixture_file_upload("/home/ahmed/Desktop/default.png", "image/png")
+    user.profile_picture = fixture_file_upload(filename_path, "image/png")
     user.password = "password"
     user.password_confirmation = "password"
     user.save()
@@ -73,7 +73,7 @@ RSpec.describe User, type: :model do
     user.user_name = "               "
     user.email = "shrex@email.com"
     user.phone_number = 8373892888
-    user.profile_picture = fixture_file_upload("/home/ahmed/Desktop/default.png", "image/png")
+    user.profile_picture = fixture_file_upload(filename_path, "image/png")
     user.password = "password"
     user.password_confirmation = "password"
     user.save()
@@ -86,7 +86,7 @@ RSpec.describe User, type: :model do
     user.user_name = "@#$%^&*&(*("
     user.email = "shrex@email.com"
     user.phone_number = 8373892888
-    user.profile_picture = fixture_file_upload("/home/ahmed/Desktop/default.png", "image/png")
+    user.profile_picture = fixture_file_upload(filename_path, "image/png")
     user.password = "password"
     user.password_confirmation = "password"
     user.save()
@@ -99,7 +99,7 @@ RSpec.describe User, type: :model do
     user.user_name = "Ahmed&&^"
     user.email = "shrex@email.com"
     user.phone_number = 8373892888
-    user.profile_picture = fixture_file_upload("/home/ahmed/Desktop/default.png", "image/png")
+    user.profile_picture = fixture_file_upload(filename_path, "image/png")
     user.password = "password"
     user.password_confirmation = "password"
     user.save()
@@ -111,7 +111,7 @@ RSpec.describe User, type: :model do
     user.user_name = "Ahmed"
     user.email = ""
     user.phone_number = 8373892666
-    user.profile_picture = fixture_file_upload("/home/ahmed/Desktop/default.png", "image/png")
+    user.profile_picture = fixture_file_upload(filename_path, "image/png")
     user.password = "password"
     user.password_confirmation = "password"
     user.save()
@@ -124,7 +124,7 @@ RSpec.describe User, type: :model do
     user.user_name = "Ahmed"
     user.email = "Ahmedgamil.com"
     user.phone_number = 8373892666
-    user.profile_picture = fixture_file_upload("/home/ahmed/Desktop/default.png", "image/png")
+    user.profile_picture = fixture_file_upload(filename_path, "image/png")
     user.password = "password"
     user.password_confirmation = "password"
     user.save()
@@ -137,7 +137,7 @@ RSpec.describe User, type: :model do
   #   user.user_name = "Ahmed"
   #   user.email = "Ahmed@gamil."
   #   user.phone_number = 8373892666
-  #   user.profile_picture = fixture_file_upload("/home/ahmed/Desktop/default.png", "image/png")
+  #   user.profile_picture = fixture_file_upload(filename_path, "image/png")
   #   user.password = "password"
   #   user.password_confirmation = "password"
   #   user.save()
@@ -150,7 +150,7 @@ RSpec.describe User, type: :model do
     user.user_name = "Ahmed"
     user.email = "Ahmed@gamil.com"
     user.phone_number =
-    user.profile_picture = fixture_file_upload("/home/ahmed/Desktop/default.png", "image/png")
+    user.profile_picture = fixture_file_upload(filename_path, "image/png")
     user.password = "password"
     user.password_confirmation = "password"
     user.save()
@@ -163,7 +163,7 @@ RSpec.describe User, type: :model do
     user.user_name = "Ahmed"
     user.email = "Ahmed@gamil.com"
     user.phone_number = 201055599433
-    user.profile_picture = fixture_file_upload("/home/ahmed/Desktop/default.png", "image/png")
+    user.profile_picture = fixture_file_upload(filename_path, "image/png")
     user.password = "password"
     user.password_confirmation = "password"
     user.save()
@@ -190,7 +190,7 @@ RSpec.describe User, type: :model do
   #   user.user_name = "Ahmed"
   #   user.email = "Ahmed@gamil.com"
   #   user.phone_number = 1055599433
-  #   user.profile_picture = fixture_file_upload("/home/ahmed/Desktop/pdf.pdf", "file/pdf")
+  #   user.profile_picture = fixture_file_upload(filename_path, "file/pdf")
   #   user.password = "password"
   #   user.password_confirmation = "password"
   #   user.save()
@@ -203,7 +203,7 @@ RSpec.describe User, type: :model do
     user.user_name = "Ahmed"
     user.email = "Ahmed@gamil.com"
     user.phone_number = 5599433
-    user.profile_picture = fixture_file_upload("/home/ahmed/Desktop/default.png", "image/png")
+    user.profile_picture = fixture_file_upload(filename_path, "image/png")
     user.password = ""
     user.password_confirmation = ""
     user.save()
@@ -216,7 +216,7 @@ RSpec.describe User, type: :model do
     user.user_name = "Ahmed"
     user.email = "Ahmed@gamil.com"
     user.phone_number = 5593339433
-    user.profile_picture = fixture_file_upload("/home/ahmed/Desktop/default.png", "image/png")
+    user.profile_picture = fixture_file_upload(filename_path, "image/png")
     user.password = "()*&(*&(*&"
     user.password_confirmation = "()*&(*&(*&"
     user.save()
@@ -229,7 +229,7 @@ RSpec.describe User, type: :model do
     user.user_name = "Ahmed"
     user.email = "Ahmed@gamil.com"
     user.phone_number = 5599433
-    user.profile_picture = fixture_file_upload("/home/ahmed/Desktop/default.png", "image/png")
+    user.profile_picture = fixture_file_upload(filename_path, "image/png")
     user.password = "()*&(*&*&"
     user.password_confirmation = "()*&(*&(*&"
     user.save()
@@ -242,7 +242,7 @@ RSpec.describe User, type: :model do
     user.user_name = "Ahmed"
     user.email = "Ahmed@gamil.com"
     user.phone_number = 5599433333
-    user.profile_picture = fixture_file_upload("/home/ahmed/Desktop/default.png", "image/png")
+    user.profile_picture = fixture_file_upload(filename_path, "image/png")
     user.password = "123456"
     user.password_confirmation = "123456"
     user.save()
