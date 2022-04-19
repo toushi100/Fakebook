@@ -86,7 +86,7 @@
           <%end%>
         <% end %>
       </div>
-        <%= render 'comments/form' %>
+        <%= render 'comments/form' ,post:post}%>
         <% if post.comments%>
       <%= render post.comments %>
 
