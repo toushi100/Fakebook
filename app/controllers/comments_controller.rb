@@ -13,7 +13,7 @@ before_action :authenticate_user!, only: [:create]
       message = "#{current_user.user_name} commented on a #{@post.user.user_name}'s post"
       scope = current_user.friends
       SendNotificationsJob.perform_now({:message => message, :scope => scope})
-      
+      redirect_to request.referrer
     else
       redirect_to new_user_session_url
     end
