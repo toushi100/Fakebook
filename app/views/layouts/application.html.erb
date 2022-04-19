@@ -49,7 +49,7 @@
           <ul class="text-white">
           <%if user_signed_in?%>
             <li><a href="../posts" class="text-white"> <%= t "Timeline" %></a></li>
-            <%notifications = Notification.where(user_id: current_user.id, viewed: false)%>
+            <%notifications = Notification.where(user_id: current_user.id, Viewed: false)%>
             
             <li class="dropdown"><a href="../notifications/<%=current_user.id%>"><span class="text-white">
              <%= t "Notifications" %>
