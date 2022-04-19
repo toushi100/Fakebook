@@ -1,4 +1,4 @@
-<%= form_with url: post_comment_url, method: :post do |form| %>
+<%= form_with url: post_comment_url(post), method: :post do |form| %>
      
     <div>
         <%= form.label :content, style: "display: block" %>
