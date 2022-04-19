@@ -18,7 +18,7 @@ Run the following command in the root directory to install all required gems
 
 App is deployed on heruko:
 
-https://thawing-brushlands-72941.herokuapp.com/?fbclid=IwAR2Y59AweGu4POSH1UbaWP09qx2ydmMw1QLSYrMNnZk6rwFKdz3XFvSZJGU
+https://sheltered-mesa-44215.herokuapp.com/
 
 # Design and Planning
 
