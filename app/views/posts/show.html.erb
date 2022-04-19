@@ -6,62 +6,8 @@
 
 
 <%= render @post %>
-<p> <%= react = @post.likes.count + @post.hearts.count + @post.angries.count + @post.sads.count + @post.wows.count %> <%= t("Reacts") %> </p>
-<p> <%= @post.likes.count %> Likes <%= @post.hearts.count %> Love <%= @post.angries.count %> Angry <%= @post.sads.count %> Sad <%= @post.wows.count %> Wow </p>
-<%if signed_in?%>
-<% like = current_user.likes.find_by(post: @post) %>
-<% heart = current_user.hearts.find_by(post: @post) %>
-<% angry = current_user.angries.find_by(post: @post) %>
-<% sad = current_user.sads.find_by(post: @post) %>
-<% wow = current_user.wows.find_by(post: @post) %>
-<%end%>
-
-<div class="btn btn-primary">
-    <% if like.nil? %>
-      <%= button_to "Like", add_likes_url, :class => "btn" %>
-    <% else %>
-      <%= button_to "Dislike", remove_likes_url(like), method: :delete, :class => "btn" %>
-  <% end %>
-</div>
-
-<div class="btn btn-danger">
-    <% if heart.nil? %>
-      <%= button_to "Love", add_hearts_url, :class => "btn" %>
-    <% else %>
-      <%= button_to "Undo", remove_hearts_url(heart), method: :delete, :class => "btn" %>
-  <% end %>
-</div>
-
-<div class="btn btn-warning">
-    <% if angry.nil? %>
-      <%= button_to "Angry", add_angry_url, :class => "btn" %>
-    <% else %>
-      <%= button_to "Undo", remove_angry_url(angry), method: :delete, :class => "btn" %>
-  <% end %>
-</div>
-
-<div class="btn btn-warning">
-    <% if sad.nil? %>
-      <%= button_to "Sad", add_sads_url, :class => "btn" %>
-    <% else %>
-      <%= button_to "Undo", remove_sads_url(sad), method: :delete, :class => "btn" %>
-  <% end %>
-</div>
-
-<div class="btn btn-warning">
-    <% if wow.nil? %>
-      <%= button_to "Wow", add_wows_url, :class => "btn" %>
-    <% else %>
-      <%= button_to "Undo", remove_wows_url(wow), method: :delete, :class => "btn" %>
-  <% end %>
-</div>
 
 
 
 
-<div>
-  <%= link_to t("Edit this post"), edit_post_path(@post) %> 
-  <%= link_to t("Back to posts"), posts_path %>
 
-  <%= button_to t("Destroy this post"), @post, method: :delete %>
-</div>

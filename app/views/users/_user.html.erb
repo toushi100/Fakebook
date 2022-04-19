@@ -1,7 +1,7 @@
 <div class="container-xs">
   <div class="row">
     <div class="col-md-3">
-      <%= image_tag user.profile_picture , size: "200x200" %>
+      <%= image_tag user.profile_picture , size: "200x200" ,class:"rounded-circle"%>
       <% iscurrent = false %>
       <% if current_user == user %>
         <% iscurrent = true %>
@@ -33,7 +33,6 @@
       <% @posts.each do |post| %>
         <%= render 'posts/post', post: post %>
         <p>
-          <%= link_to t("Show this post"), post %>
         </p>
       <% end %>
     </div>
