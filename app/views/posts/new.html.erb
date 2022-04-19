@@ -1,0 +1,9 @@
+<h1><%= t("New post") %></h1>
+
+<%= render "form", post: @post %>
+
+<br>
+
+<div>
+  <%= link_to <%= t("Back to posts"), posts_path %>
+</div>

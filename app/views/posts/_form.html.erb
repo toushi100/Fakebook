@@ -1,0 +1,18 @@
+<%= form_with url: posts_url,method: :post do |form| %>
+  <div class="form-group">
+    <div>
+      <%= form.text_area :text,placeholder:"Say something inspiring to your Fake Friends",class:"form-control" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+
+        <%= form.file_field :image, multiple:true ,class:"form-control"%>
+      </div>
+
+      <div class="col">
+        <%= form.submit 'Post' ,class:"form-control text-white" ,style:"background-color:#4267B2;"%>
+      </div>
+    
+  </div>
+<% end %>

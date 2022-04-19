@@ -1,0 +1,5 @@
+<h1>Joined Groups</h1>
+<% current_user.groups.each do |group| %>
+      <%= render 'groups/group', group: group %>
+      <%= button_to 'Leave', remove_user_from_group_path(group.id), method: :delete%>
+<% end %>

@@ -1,0 +1,23 @@
+<h1><%= t("Find New Friends") %>! :D</h1>
+
+<% @users.each do |user| %>
+    
+    
+      <div class="card">
+        <%= image_tag user.profile_picture , size: "200x200" %>
+        <div class="card-body">
+
+        <p>
+          <strong style="color : Red" class="card-title" ><%= t("Name")%>:</strong>
+          <%= user.user_name %>
+        </p>
+
+        <br>
+          <%= link_to t('Show Profile') ,show_user_path(id: user.id)%>
+          <%= button_to t('Send Friend Request'), send_friend_request_path(user.id) %>
+        <br>
+        </div>
+
+        
+      </div>
+<% end %>

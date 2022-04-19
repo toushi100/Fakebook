@@ -1,16 +1,165 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Facebook</title>
+    <title>Fakebook</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%=javascript_include_tag "application"%>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- Google Fonts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&family=Titillium+Web:wght@600&display=swap" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <%= stylesheet_link_tag "main.css" %>
+    <%= stylesheet_link_tag "variables.css" %>
   </head>
-
   <body>
-    <%= yield %>
-  </body>
+  
+    <!-- ======= Header ======= -->
+    <header id="header" class="header d-flex align-items-center fixed-top" style="background-color:#4267B2;">
+      <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+        <a href="<%= home_url %>" class="logo d-flex align-items-center">
+          <!-- Uncomment the line below if you also wish to use an image logo -->
+          <!-- <img src="assets/img/logo.png" alt=""> -->
+          <h1 class="text-white"style="font-family: 'Titillium Web', sans-serif;">Fakebook</h1>
+        </a>
+
+        <!-- ======= Navbar ======= -->
+        
+        <nav id="navbar" class="navbar">
+          <ul class="text-white">
+          <%if user_signed_in?%>
+            <li><a href="../posts" class="text-white"> <%= t "Timeline" %></a></li>
+            <%notifications = Notification.where(user_id: current_user.id, viewed: false)%>
+            
+            <li class="dropdown"><a href="../notifications/<%=current_user.id%>"><span class="text-white">
+             <%= t "Notifications" %>
+            <% if notifications.count > 0 %>
+            <strong style="background-color:red"><%= notifications.count %> </strong>
+            <%end%>
+            </span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <% @notifications = Notification.where(user_id: current_user.id).limit(notifications.count)%>
+              <ul>
+              <%if @notifications.count == 0%><li>
+                <a href="#"><%= t("No new notifications") %></a></li>
+              <%end%>
+                <%@notifications.each do |notification|%>
+                  <li><a href="#"><%=notification.Message%></a></li>
+                <%end%>
+                
+              </ul>
+            </li>
+            <li><a href='../users'class="text-white"></i><%= t "Find Friends" %></a></li>
+            <li><a href="../groups" class="text-white"><%= t "Groups" %> </a></li>
+            <li><a href="../events" class="text-white"><%= t "Events" %> </a></li>
+            <li class="dropdown"><a  href='<%= user_url(current_user) %>'><span class="text-white"><%=current_user.user_name=%></span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+              <ul>
+                <li><a href="<%= destroy_user_session_url %>" ></i><%= t "Sign Out" %></a></li>
+              </ul>
+            </li>
+            <% else %>
+            <li><a href='<%= new_user_registration_url%>' class ="btn btn-default text-white"><%= t "Sign Up" %></a></li>
+            <li><a href="<%= new_user_session_url %>" class ="btn btn-default text-white" ><%= t "Sign In" %></a></li>
+            <% end %>
+            
+            <% locale = I18n.locale%>
+            <% if locale == :en%>
+              <% locale = :ar%>
+            <% else%>
+              <% locale = :en%>
+            <% end%>
+            <% current_uri = request.env['PATH_INFO']%>
+            <li style="float: right;"><%= link_to t("lang"), switch_url(locale: locale, path: current_uri), class:"btn btn-default text-white"%></li>
+       
+            </ul>
+
+</nav>
+<!-- .navbar -->
+
+</div>
+</header>
+<!-- End Header -->
+<main id="main">
+  <!-- ======= Hero Slider Section ======= -->
+  <section id="hero-slider" class="hero-slider">
+    <div class="container-md" data-aos="fade-in">
+      <div class="row">
+        <div class="col-12">
+          <div class="swiper sliderFeaturedPosts">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <p class="notice"><%= notice %></p>
+                <p class="alert"><%= alert %></p>
+                <%= yield %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Hero Slider Section -->
+  <% # <%= render "layouts/posts_layout" %>
+</main><!-- End #main -->
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer" style="background-color:#4267B2;">
+  <div class="footer-content">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-4">
+          <h3 class="footer-heading">About Fakebook</h3>
+          <p>This Website was made as the final project in Ruby on rail bootcamp at Sprints</p>
+
+          <p><a href="https://github.com/toushi100/Fakebook" class="footer-link-more">Learn More</a></p>
+        </div>
+        <div class="col-lg-4 ">
+          <h3 class="footer-heading">Contributers</h3>
+          <ul >
+          <li><a class="text-white" href="">Abdelrahman Mohamed</a></li>
+          <li><a class="text-white"href="https://www.linkedin.com/in/ahmed-mady-502b78201/">Ahmed Mady</a></li>
+          <li><a class="text-white"href="https://www.linkedin.com/in/ahmed-salah-9a1922146/">Ahmed Salah</a></li>
+          <li><a class="text-white"href="https://www.linkedin.com/in/rawan-mohamed-975232167/">Rawan Mohamed</a></li>
+  </ul>
+        </div>
+        
+        
+      </div>
+    </div>
+  </div>
+  <div class="footer-legal">
+    <div class="container">
+      <div class="row justify-content-between">
+        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+          <div class="copyright">
+            © Copyright <strong><span>Fakebook</span></strong>. All Rights Reserved
+          </div>
+          <div class="credits">
+
+          </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
 </html>
