@@ -89,7 +89,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_06_113635) do
 
   create_table "events", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "date", default: "2022-04-14 00:13:21"
+    t.datetime "date", default: "2022-04-18 23:38:52"
     t.string "description"
     t.boolean "online_InPerson", null: false
     t.boolean "post_permission", default: true

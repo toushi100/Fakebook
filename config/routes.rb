@@ -80,7 +80,7 @@ Rails.application.routes.draw do
   # Not found
   get 'not_found', to: 'pages#not_found', as:'not_found'
 
-  root to: "home#index", as: "home"
+  root to: "home#index", as:"home"
 
   # locale
   get '*path?locale=:locale', to: 'application#switch_locale', as: 'switch'

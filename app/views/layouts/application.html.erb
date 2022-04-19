@@ -71,7 +71,6 @@
             <li><a href='../users'class="text-white"></i><%= t "Find Friends" %></a></li>
             <li><a href="../groups" class="text-white"><%= t "Groups" %> </a></li>
             <li><a href="../events" class="text-white"><%= t "Events" %> </a></li>
-            <li><a href="/not_found" class="text-white"><%= t "Blog" %></a></li>
             <li class="dropdown"><a  href='<%= user_url(current_user) %>'><span class="text-white"><%=current_user.user_name=%></span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
                 <li><a href="<%= destroy_user_session_url %>" ></i><%= t "Sign Out" %></a></li>
@@ -127,41 +126,22 @@
     <div class="container">
       <div class="row g-5">
         <div class="col-lg-4">
-          <h3 class="footer-heading">About ZenBlog</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam ab, perspiciatis beatae autem deleniti voluptate nulla a dolores, exercitationem eveniet libero laudantium recusandae officiis qui aliquid blanditiis omnis quae. Explicabo?</p>
-          <p><a href="about.html" class="footer-link-more">Learn More</a></p>
+          <h3 class="footer-heading">About Fakebook</h3>
+          <p>This Website was made as the final project in Ruby on rail bootcamp at Sprints</p>
+
+          <p><a href="https://github.com/toushi100/Fakebook" class="footer-link-more">Learn More</a></p>
         </div>
-        <div class="col-6 col-lg-2">
-          <h3 class="footer-heading">Navigation</h3>
-          <ul class="footer-links list-unstyled">
-            <li><a href="index.html"><i class="bi bi-chevron-right"></i> Home</a></li>
-            <li><a href="index.html"><i class="bi bi-chevron-right"></i> Blog</a></li>
-            <li><a href="category.html"><i class="bi bi-chevron-right"></i> Categories</a></li>
-            <li><a href="single-post.html"><i class="bi bi-chevron-right"></i> Single Post</a></li>
-            <li><a href="about.html"><i class="bi bi-chevron-right"></i> About us</a></li>
-            <li><a href="contact.html"><i class="bi bi-chevron-right"></i> Contact</a></li>
-          </ul>
+        <div class="col-lg-4 ">
+          <h3 class="footer-heading">Contributers</h3>
+          <ul >
+          <li><a class="text-white" href="">Abdelrahman Mohamed</a></li>
+          <li><a class="text-white"href="https://www.linkedin.com/in/ahmed-mady-502b78201/">Ahmed Mady</a></li>
+          <li><a class="text-white"href="https://www.linkedin.com/in/ahmed-salah-9a1922146/">Ahmed Salah</a></li>
+          <li><a class="text-white"href="https://www.linkedin.com/in/rawan-mohamed-975232167/">Rawan Mohamed</a></li>
+  </ul>
         </div>
-        <div class="col-6 col-lg-2">
-          <h3 class="footer-heading">Categories</h3>
-          <ul class="footer-links list-unstyled">
-            <li><a href="category.html"><i class="bi bi-chevron-right"></i> Business</a></li>
-          </ul>
-        </div>
-        <div class="col-lg-4">
-          <h3 class="footer-heading">Recent Posts</h3>
-          <ul class="footer-links footer-blog-entry list-unstyled">
-            <li>
-              <a href="single-post.html" class="d-flex align-items-center">
-                <img src="assets/img/post-sq-1.jpg" alt="" class="img-fluid me-3">
-                <div>
-                  <div class="post-meta d-block"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                  <span>5 Great Startup Tips for Female Founders</span>
-                </div>
-              </a>
-            </li>
-          </ul>
-        </div>
+        
+        
       </div>
     </div>
   </div>
@@ -170,29 +150,16 @@
       <div class="row justify-content-between">
         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
           <div class="copyright">
-            © Copyright <strong><span>ZenBlog</span></strong>. All Rights Reserved
+            © Copyright <strong><span>Fakebook</span></strong>. All Rights Reserved
           </div>
           <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/herobiz-bootstrap-business-template/ -->
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+
           </div>
         </div>
-        <div class="col-md-6">
-          <div class="social-links mb-3 mb-lg-0 text-center text-md-end">
-            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
-            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-          </div>
-        </div>
+       
       </div>
     </div>
   </div>
 </footer>
-<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 </body>
 </html>
