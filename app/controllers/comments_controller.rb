@@ -23,7 +23,6 @@ before_action :authenticate_user!, only: [:create]
     @comment = Comment.find(params[:id])
     @comment = @comment.update(comment_params)
     @comment.save()
-    redirect_to post_url(@post)
   end
 
   def destroy_comment
