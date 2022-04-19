@@ -1,12 +1,11 @@
 <%= form_with url: post_comment_url(@posts), method: :post do |form| %>
      
     <div>
-        <%= form.label :content, style: "display: block" %>
-        <%= form.text_area :content %>
+        <%= form.text_area :content,class:"form-control" %>
     </div>
 
     <div>
-        <%= form.submit %>
+        <%= form.submit "Comment"%>
     </div>
 
 <% end %>
