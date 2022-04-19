@@ -7,7 +7,7 @@ Fakebook is a facebook clone that has features similar to facebook. Features inc
 
 ## Dependencies
 
-Required ruby, rails, node, npm, yarn and sqlite3 to be installed.
+Required ruby, rails, node, npm, yarn and Postgres to be installed.
 
 ## Installation
 
