@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  #before_action :set_privacy
+  before_action :set_privacy
   
   def index
     @users=[]
