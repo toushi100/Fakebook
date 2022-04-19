@@ -1,11 +1,23 @@
-<p> <%= comment.content %> </p>
-<p> <%= time_ago_in_words(comment.created_at) %> </p>
+<div  class="mt-3  " style="background-color:#EEEEEE;">
+  <div class="row">
+    <div class="col-10">
+      <%=image_tag comment.user.profile_picture ,style:"max-width:25px;",class:"rounded-circle m-2" %>
+      <span class="mr-3 " style="font-weight:bold;"> <%= comment.user.user_name %> </span>
+      <span class="ml-3 text-muted"> <%= time_ago_in_words(comment.created_at) %></span>
+    </div>
+    <div class="col-1  mt-2">
+      <% if current_user == comment.user%>
+        <%= link_to destroy_comment_url(comment), method: :delete   do %>
+          <%=image_tag 'trash.svg',style:"max-width:17px;",class:"p-0 "%>
+        <%end%>
+      </div>
+      <div class="col-1   mt-2">
+        <%= link_to  update_comment_url(comment)  do %>
+          <%=image_tag 'edit.svg',style:"max-width:17px;",class:"p-0 "%>
+        <%end%>
+      <%end%>
+    </div>
+  </div>
+<span class="m-5  "> <%= comment.content %> </span>
 
-<%# <% if current_user?(comment.user) %>
-
-<%# <% end %> 
-
-<p> by <%= comment.user.user_name %> </p>
-
-<%# <%= button_to 'Edit', update_comment_url(comment) %> 
-<%= button_to 'Delete', destroy_comment_url(comment),method: :delete  %>
+</div>

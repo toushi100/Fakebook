@@ -7,7 +7,7 @@ before_action :authenticate_user!, only: [:create]
     if current_user != nil
       @post = Post.find(params[:post_id])
       @comment = @post.comments.new()
-      @comment.content = params["comment"]["content"]
+      @comment.content = params["content"]
       @comment.user_id = current_user.id
       @comment.save()
       message = "#{current_user.user_name} commented on a #{@post.user.user_name}'s post"
