@@ -16,7 +16,6 @@ RSpec.describe "Translation", type: :system do
 
     it "should switch to english" do
       visit users_path
-      click_link "En"
       click_link "العربية"
       expect(page).to have_text "En"
     end
