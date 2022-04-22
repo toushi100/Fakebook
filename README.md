@@ -1,32 +1,31 @@
 #Fakebook
 # Overview
 
-Fakebook is a facebook clone that has features similar to facebook. Features include users profiles, posting, commenting, reacting, friends, blocking, group, events and notifications. The app is also available in two languages.
+Fakebook is a facebook clone that has features similar to facebook. Features include users profiles, posting, commenting, reacting, adding friends, blocking, groups, events and notifications. The app is also available in two languages.
 
-# Setup
+# Getting Started
 
-## Dependencies
-
-Required ruby, rails, node, npm, yarn and Postgres to be installed.
-
-## Installation
-
-Run the following command in the root directory to install all required gems
-`bundle install`
-
-## Getting Started
-
-App is deployed on heruko:
+To view deployed app on heruko:
 
 https://sheltered-mesa-44215.herokuapp.com/
 
+For running on local server run the following command in the root directory to install all required gems
+`bundle install`, then
+`rails server`
+
+Before installation if you're using Sqlite3 make sure it is installed and uncomment its line in gemfile. Postgres is used in production but you can connect to your local database with the dbms in favor and the required connection configuration if it's not the default.
+
+## Dependencies
+
+Required for development ruby, rails, node, npm, yarn and Postgres/sqlite3 to be installed.
+
 # Design and Planning
 
-## Use Case
+## Use Case Diagram
 
 https://drive.google.com/file/d/1QNfA4-dIO1G07BLYhte64o05K-HH50Vb/view?usp=sharing
 
-## Sequence diagrams
+## Sequence Diagrams
 
 https://drive.google.com/file/d/1HL1k2lhETzDTMDE8Sy2KNP3Z0WMTheon/view?usp=sharing
 
